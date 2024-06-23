@@ -1,6 +1,5 @@
 
 import { Link } from "react-router-dom"
-import { Button } from "../components/ui/button"
 
 const Home = () => {
     return (
@@ -10,11 +9,11 @@ const Home = () => {
                     Welcome to Cricadictor
                 </p>
                 <br />
-                <Button variant="link">
-                    <Link to="/team">
+                <button className="text-black">
+                    <Link to="/team-selection">
                         Start Game
                     </Link>
-                </Button>
+                </button>
             </div>
         </div>
     )

@@ -1,7 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-
+import myTeam_RunSlice from "../slices/runs/my-team_runs-slice";
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    myTeam_RunSlice: myTeam_RunSlice,
+  },
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

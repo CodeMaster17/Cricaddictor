@@ -13,7 +13,7 @@ import { Button } from "../ui/button"
 
 // redux
 import { useDispatch } from "react-redux";
-import { setTeamBPlayers } from "../../lib/slice";
+// import { setTeamBPlayers } from "../../lib/slice";
 
 
 const formSchema = z.object({

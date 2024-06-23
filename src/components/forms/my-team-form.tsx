@@ -13,7 +13,7 @@ import { Button } from "../ui/button"
 
 // redux
 import { useDispatch } from "react-redux";
-import { setTeamAPlayers } from "../../lib/slice";
+// import { setTeamAPlayers } from "../../lib/slice";
 
 const formSchema = z.object({
     teamAPlayer1: z.string().min(2, {
@@ -43,10 +43,10 @@ const TeamSelectorA = () => {
     function onSubmit(values: z.infer<typeof formSchema>) {
         setIsDisabled(true)
         console.log(values)
-        dispatch(setTeamAPlayers({
-            player1: values.teamAPlayer1,
-            player2: values.teamAPlayer2,
-        }));
+        // dispatch(setTeamAPlayers({
+        //     player1: values.teamAPlayer1,
+        //     player2: values.teamAPlayer2,
+        // }));
     }
 
     return (
