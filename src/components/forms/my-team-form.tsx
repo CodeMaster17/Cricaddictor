@@ -12,9 +12,8 @@ import { Button } from "../ui/button"
 
 
 // redux
-// import { useDispatch } from "react-redux";
-// import { setTeamAPlayers } from "@/store/slices/team";
-// import { useState } from "react"
+import { useDispatch } from "react-redux";
+import { setTeamAPlayers } from "../../lib/slice";
 
 const formSchema = z.object({
     teamAPlayer1: z.string().min(2, {
@@ -31,7 +30,7 @@ const TeamSelectorA = () => {
     const [isDisabled, setIsDisabled] = useState(false)
 
     // redux
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -44,10 +43,10 @@ const TeamSelectorA = () => {
     function onSubmit(values: z.infer<typeof formSchema>) {
         setIsDisabled(true)
         console.log(values)
-        // dispatch(setTeamAPlayers({
-        //     player1: values.teamAPlayer1,
-        //     player2: values.teamAPlayer2,
-        // }));
+        dispatch(setTeamAPlayers({
+            player1: values.teamAPlayer1,
+            player2: values.teamAPlayer2,
+        }));
     }
 
     return (
@@ -91,7 +90,7 @@ const TeamSelectorA = () => {
                                     </FormItem>
                                 )}
                             />
-                            <Button disabled={isDisabled} type="submit">Next</Button>
+                            <Button disabled={isDisabled} type="submit" className="bg-purple">Next</Button>
                         </form>
                     </Form>
                 </div>

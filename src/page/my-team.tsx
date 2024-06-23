@@ -1,12 +1,12 @@
-import TeamSelectorA from "../components/forms/my-team-form"
+import MyTeamForm from "../components/forms/my-team-form"
 
 const MyTeam = () => {
     return (
         <div className='w-full h-screen'>
             <div>
-                <p className="text-3xl text-center">Your team</p>
+                <p className="text-3xl text-center text-bold">Your team</p>
             </div>
-            <TeamSelectorA />
+            <MyTeamForm />
         </div>
     )
 }

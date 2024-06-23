@@ -12,31 +12,31 @@ import { Button } from "../ui/button"
 
 
 // redux
-// import { useDispatch } from "react-redux";
-// import { setTeamAPlayers } from "@/store/slices/team";
-// import { useState } from "react"
+import { useDispatch } from "react-redux";
+import { setTeamBPlayers } from "../../lib/slice";
+
 
 const formSchema = z.object({
-    teamAPlayer1: z.string().min(2, {
+    teamBPlayer1: z.string().min(2, {
         message: "Username must be at least 2 characters.",
     }),
-    teamAPlayer2: z.string().min(2, {
+    teamBPlayer2: z.string().min(2, {
         message: "Username must be at least 2 characters.",
     }),
 
 })
 
-const TeamSelectorA = () => {
+const OpponentTeamForm = () => {
 
     const [isDisabled, setIsDisabled] = useState(false)
 
     // redux
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            teamAPlayer1: "",
-            teamAPlayer2: "",
+            teamBPlayer1: "",
+            teamBPlayer2: "",
         },
     })
 
@@ -44,23 +44,23 @@ const TeamSelectorA = () => {
     function onSubmit(values: z.infer<typeof formSchema>) {
         setIsDisabled(true)
         console.log(values)
-        // dispatch(setTeamAPlayers({
-        //     player1: values.teamAPlayer1,
-        //     player2: values.teamAPlayer2,
-        // }));
+        dispatch(setTeamBPlayers({
+            player1: values.teamBPlayer1,
+            player2: values.teamBPlayer2,
+        }));
     }
 
     return (
         <>
             <div className='w-4/5 h-[350px] border-2 mt-8'>
-                <p>Team A</p>
+                <p>Opponent team</p>
                 <div>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                             <FormField
                                 disabled={isDisabled}
                                 control={form.control}
-                                name="teamAPlayer1"
+                                name="teamBPlayer1"
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Player 1</FormLabel>
@@ -77,7 +77,7 @@ const TeamSelectorA = () => {
                             <FormField
                                 disabled={isDisabled}
                                 control={form.control}
-                                name="teamAPlayer2"
+                                name="teamBPlayer2"
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Player 2</FormLabel>
@@ -101,4 +101,4 @@ const TeamSelectorA = () => {
     )
 }
 
-export default TeamSelectorA
+export default OpponentTeamForm
