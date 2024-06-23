@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import myTeam_RunSlice from "../slices/runs/my-team_runs-slice";
+import gameReducer from "../slices/game-slice";
 export const store = configureStore({
   reducer: {
-    myTeam_RunSlice: myTeam_RunSlice,
+    game: gameReducer,
   },
 });
 

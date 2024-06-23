@@ -6,14 +6,17 @@ import OpponentTeam from './page/opponent-team'
 import TeamDetails from './page/team-details'
 import TeamSelection from './page/team-selection'
 import ChooseTeamSize from './page/choose-team-size'
+import Navbar from './components/Navbar'
 function App() {
 
   return (
     <>
       <Router>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/player-selection" element={<ChooseTeamSize />} />
+          <Route path="/size-selection" element={<ChooseTeamSize />} />
+          {/* <Route path="/player-selection" element={<ChooseTeamSize />} /> */}
           <Route path="/team-selection" element={<TeamSelection />} />
           <Route path="/my-team" element={<MyTeam />} />
           <Route path="/opponent-team" element={<OpponentTeam />} />

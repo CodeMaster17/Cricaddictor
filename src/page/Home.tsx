@@ -10,7 +10,7 @@ const Home = () => {
                 </p>
                 <br />
                 <button className="text-black">
-                    <Link to="/team-selection">
+                    <Link to="/size-selection">
                         Start Game
                     </Link>
                 </button>
