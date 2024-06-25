@@ -11,8 +11,10 @@ import { Button } from "../ui/button"
 
 
 
+
 // redux
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom"
 // import { setTeamAPlayers } from "../../lib/slice";
 
 const formSchema = z.object({
@@ -28,7 +30,7 @@ const formSchema = z.object({
 const TeamSelectorA = () => {
 
     const [isDisabled, setIsDisabled] = useState(false)
-
+    const navigate = useNavigate()
     // redux
     const dispatch = useDispatch();
     const form = useForm<z.infer<typeof formSchema>>({
@@ -42,11 +44,8 @@ const TeamSelectorA = () => {
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         setIsDisabled(true)
-        console.log(values)
-        // dispatch(setTeamAPlayers({
-        //     player1: values.teamAPlayer1,
-        //     player2: values.teamAPlayer2,
-        // }));
+        dispatch({ type: "cricaddicor/reducer_setPlayerNames_teamA", payload: { player1: values.teamAPlayer1, player2: values.teamAPlayer2 } })
+        navigate('/opponent-team')
     }
 
     return (

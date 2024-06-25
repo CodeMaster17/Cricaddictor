@@ -68,13 +68,14 @@ const gameSlice = createSlice({
   initialState,
   reducers: {
     reducer_setTeamSize(state, action: PayloadAction<number>) {
+      console.log("Team sisze set reducer");
       state.teamSize = action.payload;
     },
     reducer_setPlayerNames_teamA(state, action: PayloadAction<string[]>) {
       state.players.teamA = action.payload;
     },
     reducer_setPlayerNames_teamB(state, action: PayloadAction<string[]>) {
-      state.players.teamA = action.payload;
+      state.players.teamB = action.payload;
     },
     reducer_chooseSide(state, action: PayloadAction<"teamA" | "teamB">) {
       state.choosenSide = action.payload;
