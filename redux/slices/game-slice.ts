@@ -12,7 +12,7 @@ interface PlayerNames {
 
 interface Toss {
   winner: "teamA" | "teamB" | "";
-  choice: "bat" | "bowl" | "";
+  choice: "heads" | "tails" | "";
 }
 
 interface Score {
@@ -37,6 +37,7 @@ interface GameState {
     | "toss"
     | "chooseBatBowl"
     | "play";
+  choseTo: "bat" | "bowl" | "";
 }
 
 // defining the initial state
@@ -59,6 +60,7 @@ const initialState: GameState = {
     teamA: 0,
     teamB: 0,
   },
+  choseTo: "",
   currentInnning: "",
   gameState: "home",
 };
@@ -83,8 +85,11 @@ const gameSlice = createSlice({
     reducer_setTossWinner(state, action: PayloadAction<"teamA" | "teamB">) {
       state.toss.winner = action.payload;
     },
-    reducer_setTossChoice(state, action: PayloadAction<"bat" | "bowl">) {
+    reducer_setTossChoice(state, action: PayloadAction<"heads" | "tails">) {
       state.toss.choice = action.payload;
+    },
+    reducer_setChooseTo(state, action: PayloadAction<"bat" | "bowl">) {
+      state.choseTo = action.payload;
     },
     reducer_updateScore(
       state,
