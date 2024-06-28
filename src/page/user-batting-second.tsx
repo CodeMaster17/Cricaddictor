@@ -1,8 +1,8 @@
-// this file will be for user batting first and cpu batting second
+// this file will be for user batting second and cpu batting first
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store/store";
-import { CPU_ALL_OUT, GAME_END, MATCH_START, USER_ALL_OUT, USER_BATTING, USER_BATTING_START, USER_BOWLING, USER_BOWLING_START, runButtons } from "../lib/constants";
+import { CPU_ALL_OUT, CPU_BATTING, CPU_BATTING_START, CPU_BOWLING, GAME_END, MATCH_START, USER_ALL_OUT, USER_BATTING, USER_BOWLING, CPU_BOWLING_START, runButtons } from "../lib/constants";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -12,9 +12,8 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from "../components/ui/alert-dialog"
-type BattingFirst = "user" | "cpu";
 
-const UserBattingFirst = () => {
+const UserBattingSecond = () => {
     const [guessedRuns, setGuessedRuns] = useState<any[]>([]);
     const [userRuns, setUserRuns] = useState<number>(0);
     const [cpuRuns, setCpuRuns] = useState<number>(0);
@@ -25,7 +24,7 @@ const UserBattingFirst = () => {
     const [gameStatus, setGameStatus] = useState<string>(MATCH_START);
     const [userOvers, setUserOvers] = useState<number>(1);
     const [userBalls, setUserBalls] = useState<number>(0);
-    const [cpuOvers, setCpuOvers] = useState<number>(1);
+    const [cpuOvers, setCpuOvers] = useState<number>(0);
     const [cpuBalls, setCpuBalls] = useState<number>(0);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
     const [totalOVers, setTotalOvers] = useState<number>(2);
@@ -36,72 +35,20 @@ const UserBattingFirst = () => {
     const [resultDescription, setResultDescription] = useState<string>("")
 
     const modalHandler = () => {
-        setGameStatus(USER_BATTING_START)
+        setGameStatus(CPU_BATTING_START)
         setIsModalOpen(false);
     }
 
     const userBattingEndModalHanlder = () => {
-        setGameStatus(USER_BOWLING_START)
+        setGameStatus(CPU_BOWLING_START)
         setUserEndInningModal(false)
     }
 
     const teamSize = useSelector((state: RootState) => state.game.teamSize);
 
     const guessedNumberHandler = (value: number) => {
-        if (gameStatus === USER_BATTING_START) {
-            setGameStatus(USER_BATTING)
-            if (userOvers < totalOVers) {
-                console.log("userOvers", userOvers)
-                const cpuNumber = Math.floor(Math.random() * 7);
-                setGuessedNumber(value);
-                setCpuNumber(cpuNumber);
-                if (value === cpuNumber) {
-                    setUserWickets(userWickets + 1);
-                    setUserBalls(userBalls + 1);
-                    setGuessedRuns([...guessedRuns, "W"]);
-                }
-                else {
-                    setUserRuns(userRuns + value);
-                    setUserBalls(userBalls + 1);
-                    setGuessedRuns([...guessedRuns, value]);
-                }
-                if (userBalls === 5) {
-                    setUserOvers(userOvers + 1);
-                    setUserBalls(0);
-                }
-                console.log(userBalls)
-            }
-        }
-        else if (gameStatus === USER_BATTING) {
-            if (userOvers < totalOVers) {
-                console.log("userOvers", userOvers)
-                const cpuNumber = Math.floor(Math.random() * 7);
-                setGuessedNumber(value);
-                setCpuNumber(cpuNumber);
-                if (value === cpuNumber) {
-                    setUserWickets(userWickets + 1);
-                    setUserBalls(userBalls + 1);
-                    setGuessedRuns([...guessedRuns, "W"]);
-                }
-                else {
-                    setUserRuns(userRuns + value);
-                    setUserBalls(userBalls + 1);
-                    setGuessedRuns([...guessedRuns, value]);
-                }
-                if (userBalls === 5) {
-                    setUserOvers(userOvers + 1);
-                    setUserBalls(0);
-                    if (userOvers === totalOVers - 1) {
-                        setGameStatus(USER_BOWLING)
-                        setUserEndInningModal(true)
-                    }
-                }
-                console.log(userBalls)
-            }
-
-        }
-        else if (gameStatus === USER_BOWLING_START) {
-            setGameStatus(USER_BOWLING)
+        if (gameStatus === CPU_BATTING_START) {
+            setGameStatus(CPU_BATTING)
             if (cpuOvers < totalOVers) {
                 console.log("cpuOvers", cpuOvers)
                 const cpuNumber = Math.floor(Math.random() * 7);
@@ -124,7 +71,7 @@ const UserBattingFirst = () => {
                 console.log(cpuBalls)
             }
         }
-        else if (gameStatus === USER_BOWLING) {
+        else if (gameStatus === CPU_BATTING) {
             if (cpuOvers < totalOVers) {
                 console.log("cpuOvers", cpuOvers)
                 const cpuNumber = Math.floor(Math.random() * 7);
@@ -144,6 +91,58 @@ const UserBattingFirst = () => {
                     setCpuOvers(cpuOvers + 1);
                     setCpuBalls(0);
                     if (cpuOvers === totalOVers - 1) {
+                        setGameStatus(CPU_BOWLING)
+                        setUserEndInningModal(true)
+                    }
+                }
+                console.log(cpuBalls)
+            }
+
+        }
+        else if (gameStatus === CPU_BOWLING_START) {
+            setGameStatus(USER_BOWLING)
+            if (userOvers < totalOVers) {
+                console.log("userOvers", userOvers)
+                const cpuNumber = Math.floor(Math.random() * 7);
+                setGuessedNumber(value);
+                setCpuNumber(cpuNumber);
+                if (value === cpuNumber) {
+                    setUserWickets(userWickets + 1);
+                    setCpuBalls(cpuBalls + 1);
+                    setGuessedRuns([...guessedRuns, "W"]);
+                }
+                else {
+                    setUserRuns(userRuns + value);
+                    setUserBalls(userBalls + 1);
+                    setGuessedRuns([...guessedRuns, value]);
+                }
+                if (userBalls === 5) {
+                    setUserOvers(userOvers + 1);
+                    setUserBalls(0);
+                }
+                console.log(cpuBalls)
+            }
+        }
+        else if (gameStatus === CPU_BOWLING) {
+            if (userOvers < totalOVers) {
+                console.log("userOvers", userOvers)
+                const cpuNumber = Math.floor(Math.random() * 7);
+                setGuessedNumber(value);
+                setCpuNumber(cpuNumber);
+                if (value === cpuNumber) {
+                    setUserWickets(userWickets + 1);
+                    setCpuBalls(cpuBalls + 1);
+                    setGuessedRuns([...guessedRuns, "W"]);
+                }
+                else {
+                    setUserRuns(userRuns + value);
+                    setUserBalls(userBalls + 1);
+                    setGuessedRuns([...guessedRuns, value]);
+                }
+                if (userBalls === 5) {
+                    setUserOvers(userOvers + 1);
+                    setUserBalls(0);
+                    if (userOvers === totalOVers - 1) {
                         setGameStatus(GAME_END)
                     }
                 }
@@ -153,7 +152,7 @@ const UserBattingFirst = () => {
     }
 
     useEffect(() => {
-        if (gameStatus === USER_BATTING_START) {
+        if (gameStatus === CPU_BATTING_START) {
             setUserOvers(0)
             setUserBalls(0)
             setCpuBalls(0)
@@ -161,10 +160,10 @@ const UserBattingFirst = () => {
             setCpuRuns(0)
             setUserWickets(0)
             setCPUWickets(0)
-        } else if (gameStatus === USER_BOWLING_START) {
-            setCpuBalls(0)
-            setCpuRuns(0)
-            setCPUWickets(0)
+        } else if (gameStatus === CPU_BOWLING_START) {
+            setUserBalls(0)
+            setUserRuns(0)
+            setUserWickets(0)
         } else if (gameStatus === GAME_END) {
             if (userRuns > cpuRuns) {
                 setResultDescription("You win")
@@ -218,7 +217,7 @@ const UserBattingFirst = () => {
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogAction onClick={() => userBattingEndModalHanlder()}>Start Bowling</AlertDialogAction>
+                        <AlertDialogAction onClick={() => userBattingEndModalHanlder()}>View Score</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
@@ -230,8 +229,10 @@ const UserBattingFirst = () => {
                             <div className="border-2 w-40 h-40 border-2 rounded-xl">
                                 <p className="text-2xl">You</p>
                             </div>
-                            <p>{userRuns}/{userWickets}</p>
-                            <p>{userOvers}.{userBalls}/{totalOVers}(ov)</p>
+                            {gameStatus === USER_BOWLING || gameStatus === GAME_END ? <>
+                                <p>{userRuns}/{userWickets}</p>
+                                <p>{userOvers}.{userBalls}/{totalOVers}(ov)</p>
+                            </> : <p>Yet to bat</p>}
                         </div>
                         <div>
                             <img src="/versus.png" alt="versus" className="w-20 h-20" />
@@ -240,10 +241,9 @@ const UserBattingFirst = () => {
                             <div className="border-2 w-40 h-40 border-2 rounded-xl">
                                 <p className="text-2xl">Opponent</p>
                             </div>
-                            {gameStatus === USER_BOWLING || gameStatus === GAME_END ? <>
-                                <p>{cpuRuns}/{cpuWickets}</p>
-                                <p>{cpuOvers}.{cpuBalls}/{totalOVers}(ov)</p>
-                            </> : <p>Yet to bat</p>}
+                            <p>{cpuRuns}/{cpuWickets}</p>
+                            <p>{cpuOvers}.{cpuBalls}/{totalOVers}(ov)</p>
+
                         </div>
                     </div>
 
@@ -294,4 +294,4 @@ const UserBattingFirst = () => {
     );
 };
 
-export default UserBattingFirst;
+export default UserBattingSecond;

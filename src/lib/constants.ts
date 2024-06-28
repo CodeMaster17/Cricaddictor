@@ -30,3 +30,12 @@ export const USER_BATTING = "USER_BATTING";
 export const USER_BOWLING = "USER_BOWLING";
 export const CPU_ALL_OUT = "CPU_ALL_OUT";
 export const MATCH_START = "MATCH_START";
+export const USER_BATTING_START = "USER_BATTING_START";
+export const USER_BOWLING_START = "USER_BOWLING_START";
+export const GAME_END = "GAME_END";
+
+// for cpu
+export const CPU_BATTING_START = "USER_BATTING_START";
+export const CPU_BATTING = "USER_BATTING";
+export const CPU_BOWLING = "USER_BOWLING";
+export const CPU_BOWLING_START = "USER_BOWLING_START";

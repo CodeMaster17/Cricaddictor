@@ -1,15 +1,16 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import './App.css'
+import Navbar from './components/Navbar'
 import Home from './page/Home'
+import UserBattingFirst from './page/batting'
+import ChooseBatBowl from './page/choose-bat-bowl'
+import ChooseSide from './page/choose-side'
+import ChooseTeamSize from './page/choose-team-size'
 import MyTeam from './page/my-team'
 import OpponentTeam from './page/opponent-team'
 import TeamDetails from './page/team-details'
-import ChooseTeamSize from './page/choose-team-size'
-import Navbar from './components/Navbar'
-import ChooseSide from './page/choose-side'
 import Toss from './page/toss'
-import ChooseBatBowl from './page/choose-bat-bowl'
-import Batting from './page/batting'
+import UserBattingSecond from './page/user-batting-second'
 function App() {
 
   return (
@@ -26,7 +27,8 @@ function App() {
           <Route path="/toss" element={<Toss />} />
           <Route path="/teams" element={<TeamDetails />} />
           <Route path="/choose-bat-bowl" element={<ChooseBatBowl />} />
-          <Route path="/batting" element={<Batting />} />
+          <Route path="/game/1" element={<UserBattingFirst />} />
+          <Route path="/game/2" element={<UserBattingSecond />} />
         </Routes>
       </Router>
     </>
