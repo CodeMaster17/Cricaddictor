@@ -1,8 +1,8 @@
 // this file will be for user batting second and cpu batting first
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { RootState } from "../../redux/store/store";
-import { CPU_ALL_OUT, CPU_BATTING, CPU_BATTING_START, CPU_BOWLING, GAME_END, MATCH_START, USER_ALL_OUT, USER_BATTING, USER_BOWLING, CPU_BOWLING_START, runButtons } from "../lib/constants";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -11,7 +11,8 @@ import {
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
-} from "../components/ui/alert-dialog"
+} from "../components/ui/alert-dialog";
+import { CPU_BATTING, CPU_BATTING_START, CPU_BOWLING, CPU_BOWLING_START, GAME_END, MATCH_START, USER_BOWLING, runButtons } from "../lib/constants";
 
 const UserBattingSecond = () => {
     const [guessedRuns, setGuessedRuns] = useState<any[]>([]);
@@ -33,6 +34,9 @@ const UserBattingSecond = () => {
     const [userEndInninngModal, setUserEndInningModal] = useState(false)
     const [gameEndModal, setGameEndModal] = useState(false)
     const [resultDescription, setResultDescription] = useState<string>("")
+
+    const teamA = useSelector((state: RootState) => state.game.teamName.teamA);
+    const teamB = useSelector((state: RootState) => state.game.teamName.teamB);
 
     const modalHandler = () => {
         setGameStatus(CPU_BATTING_START)
@@ -70,6 +74,9 @@ const UserBattingSecond = () => {
                     setCpuOvers(cpuOvers + 1);
                     setCpuBalls(0);
                 }
+                if (cpuWickets === teamSize - 1) {
+                    setGameStatus(CPU_BOWLING_START)
+                }
                 console.log(cpuBalls)
             }
         }
@@ -97,6 +104,9 @@ const UserBattingSecond = () => {
                         setUserEndInningModal(true)
                     }
                 }
+                if (cpuWickets === teamSize - 1) {
+                    setGameStatus(CPU_BOWLING_START)
+                }
                 console.log(cpuBalls)
             }
 
@@ -121,6 +131,9 @@ const UserBattingSecond = () => {
                 if (userBalls === 5) {
                     setUserOvers(userOvers + 1);
                     setUserBalls(0);
+                }
+                if (userWickets === teamSize - 1) {
+                    setGameStatus(GAME_END)
                 }
                 console.log(cpuBalls)
             }
@@ -148,9 +161,16 @@ const UserBattingSecond = () => {
                         setGameStatus(GAME_END)
                     }
                 }
+                if (userWickets === teamSize - 1) {
+                    setGameStatus(GAME_END)
+                }
                 console.log(cpuBalls)
             }
         }
+    }
+    const navigate = useNavigate()
+    const viewScore = () => {
+        navigate('/view-score')
     }
 
     useEffect(() => {
@@ -176,9 +196,14 @@ const UserBattingSecond = () => {
             dispatch({ type: "cricaddicor/reducer_updateScore", payload: { team: "teamA", score: userRuns } })
             dispatch({ type: "cricaddicor/reducer_updateScore", payload: { team: "teamB", score: cpuRuns } })
             setGameEndModal(true)
+        } else if (gameStatus === CPU_BOWLING) {
+            if (userRuns > cpuRuns) {
+                setGameStatus(GAME_END)
+                setResultDescription("CPU wins")
+            }
         }
         console.log("gameStatus", gameStatus)
-    }, [gameStatus])
+    }, [gameStatus, userRuns, cpuRuns])
 
 
     return (
@@ -221,29 +246,32 @@ const UserBattingSecond = () => {
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogAction onClick={() => userBattingEndModalHanlder()}>View Score</AlertDialogAction>
+                        <AlertDialogAction onClick={() => viewScore()}>View Score</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
 
-            <div className="w-full h-screen flex justify-center items-center">
-                <div className="border-2 w-3/5 h-4/5 flex flex-col items-center">
+            <div className="w-full h-screen flex justify-center items-start mt-2">
+                <div className="border-2 lg:w-3/5 xs:w-[90%] h-4/5 flex flex-col items-center">
                     <div className="w-full flex justify-between items-center border-2">
                         <div className="w-2/5 flex flex-col justify-center items-center">
                             <div className="border-2 w-40 h-40 border-2 rounded-xl">
-                                <p className="text-2xl">You</p>
+                                <p className="text-2xl">
+                                    {teamA.teamA}
+                                </p>
                             </div>
                             {gameStatus === USER_BOWLING || gameStatus === GAME_END ? <>
                                 <p>{userRuns}/{userWickets}</p>
                                 <p>{userOvers}.{userBalls}/{totalOVers}(ov)</p>
                             </> : <p>Yet to bat</p>}
+                            <p>{userOvers}.{userBalls}/{totalOVers}(ov)</p>
                         </div>
                         <div>
                             <img src="/versus.png" alt="versus" className="w-20 h-20" />
                         </div>
                         <div className="w-2/5 flex flex-col justify-center items-center">
                             <div className="border-2 w-40 h-40 border-2 rounded-xl">
-                                <p className="text-2xl">Opponent</p>
+                                <p className="text-2xl">{teamB.teamB}</p>
                             </div>
                             <p>{cpuRuns}/{cpuWickets}</p>
                             <p>{cpuOvers}.{cpuBalls}/{totalOVers}(ov)</p>
@@ -253,7 +281,7 @@ const UserBattingSecond = () => {
 
                     <div className="w-full border-2 flex flex-col gap-8">
                         <p className="text-center">Select runs you want to score.</p>
-                        <div className="w-full flex gap-8">
+                        <div className="w-full flex gap-8 flex-wrap items-center justify-center">
                             {runButtons.map((item, index) => (
                                 <button
                                     key={index}
@@ -265,19 +293,20 @@ const UserBattingSecond = () => {
                             ))}
                         </div>
                     </div>
-                    <p>The runs will be added to scoreboard until you and the CPU get the same number.</p>
-                    <p>If you and CPU get the same number, you are out!!!</p>
-                    <div className="w-full flex justify-between items-center border-2">
+                    <p className="text-center">The runs will be added to scoreboard until you and the CPU get the same number.</p>
+                    <p className="text-center mt-2">If you and CPU get the same number, you are out!!!</p>
+                    <div className="w-full mt-2 flex justify-between items-center border-2">
                         <div className="w-2/5 flex flex-col justify-center items-center">
-                            <div className="border-2 w-40 h-40 border-2 rounded-xl">
+                            <div className="border-2 w-20 h-20 border-2 rounded-xl">
                                 <p className="text-2xl">{guessedNumber}</p>
                             </div>
                         </div>
                         <div>
-                            <img src="/versus.png" alt="versus" className="w-20 h-20" />
+                            {/* <img src="/versus.png" alt="versus" className="w-20 h-20" /> */}
+                            <video src="/Cricket Ball.mp4" className="w-20 h-20"></video>
                         </div>
                         <div className="w-2/5 flex flex-col justify-center items-center">
-                            <div className="border-2 w-40 h-40 border-2 rounded-xl">
+                            <div className="border-2 w-20 h-20 border-2 rounded-xl">
                                 <p className="text-2xl">{cpuNumber}</p>
                             </div>
                         </div>

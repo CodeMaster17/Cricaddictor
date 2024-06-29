@@ -25,7 +25,7 @@ const ChooseTeamSize = () => {
 
     return (
         <div className="w-full h-screen flex justify-center items-start">
-            <div className="border-2 border-red-500 w-[90%] h-3/5 flex  flex-col justify-center items-center">
+            <div className="w-[90%] h-3/5 flex  flex-col justify-center items-center shadow-shadow_custom">
                 <p className="text-center text-2xl">Choose team size</p>
                 <p>{gameState}</p>
                 <br />
