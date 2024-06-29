@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { Link } from "react-router-dom"
 import { AppDispatch, RootState } from "../../redux/store/store"
 import { Button } from "../components/ui/button"
-import { Link } from "react-router-dom"
 
 const ChooseTeamSize = () => {
 
@@ -24,12 +24,12 @@ const ChooseTeamSize = () => {
     }
 
     return (
-        <div className="w-full h-screen flex justify-center items-center">
-            <div className="border-2 w-4/5 h-4/5 flex flex-col justify-center items-center">
+        <div className="w-full h-screen flex justify-center items-start">
+            <div className="border-2 border-red-500 w-[90%] h-3/5 flex  flex-col justify-center items-center">
                 <p className="text-center text-2xl">Choose team size</p>
                 <p>{gameState}</p>
                 <br />
-                <div className="w-full flex flex-row wrap border-2 p-2 justify-between">
+                <div className="w-full flex flex-row flex-wrap gap-2 border-2 p-2 justify-between">
                     <button className={buttonClicked && buttonClickedId === 2 ? "selected_button text-black" : "text-black button"}
                         onClick={() => clickHandler(2)}>
                         2

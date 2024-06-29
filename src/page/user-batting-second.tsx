@@ -1,6 +1,6 @@
 // this file will be for user batting second and cpu batting first
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store/store";
 import { CPU_ALL_OUT, CPU_BATTING, CPU_BATTING_START, CPU_BOWLING, GAME_END, MATCH_START, USER_ALL_OUT, USER_BATTING, USER_BOWLING, CPU_BOWLING_START, runButtons } from "../lib/constants";
 import {
@@ -44,6 +44,8 @@ const UserBattingSecond = () => {
         setUserEndInningModal(false)
     }
 
+
+    const dispatch = useDispatch();
     const teamSize = useSelector((state: RootState) => state.game.teamSize);
 
     const guessedNumberHandler = (value: number) => {
@@ -171,6 +173,8 @@ const UserBattingSecond = () => {
             else if (userRuns < cpuRuns) {
                 setResultDescription("You lose")
             }
+            dispatch({ type: "cricaddicor/reducer_updateScore", payload: { team: "teamA", score: userRuns } })
+            dispatch({ type: "cricaddicor/reducer_updateScore", payload: { team: "teamB", score: cpuRuns } })
             setGameEndModal(true)
         }
         console.log("gameStatus", gameStatus)

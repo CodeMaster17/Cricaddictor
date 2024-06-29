@@ -29,9 +29,11 @@ const ChooseBatBowl = () => {
                 </div>
                 <div className="w-full flex justify-end">
                     <Button variant="default">
-                        <Link to="/toss">
-                            Next
-                        </Link>
+                        {
+
+                            (choice == 'bowl') ? <Link to="/game/2">Next</Link> : <Link to="/game/1">Next</Link>
+                        }
+
                     </Button>
                 </div>
             </div>

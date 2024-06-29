@@ -27,7 +27,7 @@ const formSchema = z.object({
 
 })
 
-const TeamSelectorA = () => {
+const TeamName = () => {
 
     const [isDisabled, setIsDisabled] = useState(false)
     const navigate = useNavigate()
@@ -44,15 +44,16 @@ const TeamSelectorA = () => {
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         setIsDisabled(true)
-        dispatch({ type: "cricaddicor/reducer_setPlayerNames_teamA", payload: { player1: values.teamAPlayer1, player2: values.teamAPlayer2 } })
-        navigate('/opponent-team')
+        dispatch({ type: "cricaddicor/reducer_setTeamNameA", payload: { teamA: values.teamAPlayer1 } })
+        dispatch({ type: "cricaddicor/reducer_setTeamNameB", payload: { teamB: values.teamAPlayer2 } })
+        navigate('/toss')
     }
 
     return (
         <>
             <div className='w-4/5 h-[350px] border-2 mt-8'>
-                <p>Team A</p>
-                <div>
+                <p>Choose team names</p>
+                <div className="mt-4">
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                             <FormField
@@ -61,9 +62,9 @@ const TeamSelectorA = () => {
                                 name="teamAPlayer1"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Player 1</FormLabel>
+                                        <FormLabel>Your team</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="Player name 1" {...field} />
+                                            <Input placeholder="Your team name" {...field} />
                                         </FormControl>
                                         <FormDescription>
                                             This is your public display name.
@@ -78,9 +79,9 @@ const TeamSelectorA = () => {
                                 name="teamAPlayer2"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Player 2</FormLabel>
+                                        <FormLabel>Opponent team</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="Player name 2" {...field} />
+                                            <Input placeholder="Opponent team name" {...field} />
                                         </FormControl>
                                         <FormDescription>
                                             This is your public display name.
@@ -89,7 +90,7 @@ const TeamSelectorA = () => {
                                     </FormItem>
                                 )}
                             />
-                            <Button disabled={isDisabled} type="submit" className="bg-purple">Next</Button>
+                            <Button disabled={isDisabled} type="submit" className="float-right">Next</Button>
                         </form>
                     </Form>
                 </div>
@@ -99,4 +100,4 @@ const TeamSelectorA = () => {
     )
 }
 
-export default TeamSelectorA
+export default TeamName

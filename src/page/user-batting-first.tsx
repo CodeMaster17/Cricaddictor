@@ -1,8 +1,8 @@
 // this file will be for user batting first and cpu batting second
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { RootState } from "../../redux/store/store";
-import { CPU_ALL_OUT, GAME_END, MATCH_START, USER_ALL_OUT, USER_BATTING, USER_BATTING_START, USER_BOWLING, USER_BOWLING_START, runButtons } from "../lib/constants";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -11,7 +11,8 @@ import {
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
-} from "../components/ui/alert-dialog"
+} from "../components/ui/alert-dialog";
+import { GAME_END, MATCH_START, USER_BATTING, USER_BATTING_START, USER_BOWLING, USER_BOWLING_START, runButtons } from "../lib/constants";
 type BattingFirst = "user" | "cpu";
 
 const UserBattingFirst = () => {
@@ -34,6 +35,10 @@ const UserBattingFirst = () => {
     const [userEndInninngModal, setUserEndInningModal] = useState(false)
     const [gameEndModal, setGameEndModal] = useState(false)
     const [resultDescription, setResultDescription] = useState<string>("")
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
 
     const modalHandler = () => {
         setGameStatus(USER_BATTING_START)
@@ -152,6 +157,10 @@ const UserBattingFirst = () => {
         }
     }
 
+    const viewScore = () => {
+        navigate('/view-score')
+    }
+
     useEffect(() => {
         if (gameStatus === USER_BATTING_START) {
             setUserOvers(0)
@@ -168,10 +177,13 @@ const UserBattingFirst = () => {
         } else if (gameStatus === GAME_END) {
             if (userRuns > cpuRuns) {
                 setResultDescription("You win")
+
             }
             else if (userRuns < cpuRuns) {
                 setResultDescription("You lose")
             }
+            dispatch({ type: "cricaddicor/reducer_updateScore", payload: { team: "teamA", score: userRuns } })
+            dispatch({ type: "cricaddicor/reducer_updateScore", payload: { team: "teamB", score: cpuRuns } })
             setGameEndModal(true)
         }
         console.log("gameStatus", gameStatus)
@@ -218,7 +230,7 @@ const UserBattingFirst = () => {
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogAction onClick={() => userBattingEndModalHanlder()}>Start Bowling</AlertDialogAction>
+                        <AlertDialogAction onClick={() => viewScore()}>View Score</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>

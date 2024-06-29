@@ -69,6 +69,13 @@ const gameSlice = createSlice({
   name: "cricaddicor",
   initialState,
   reducers: {
+    reducer_setTeamNameA(state, action: PayloadAction<string>) {
+      state.teamName.teamA = action.payload;
+    },
+    reducer_setTeamNameB(state, action: PayloadAction<string>) {
+      state.teamName.teamB = action.payload;
+    },
+
     reducer_setTeamSize(state, action: PayloadAction<number>) {
       console.log("Team sisze set reducer");
       state.teamSize = action.payload;

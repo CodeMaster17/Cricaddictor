@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom"
-import { Button } from "../components/ui/button"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { Link } from "react-router-dom"
 import { AppDispatch, RootState } from "../../redux/store/store"
+import { Button } from "../components/ui/button"
 
 type TossResult = "win" | "lose" | "";
 
@@ -14,8 +14,8 @@ const Toss = () => {
     const [isTossDone, setIsTossDone] = useState<boolean>(false)
     const dispatch = useDispatch<AppDispatch>()
 
-    const teamA = useSelector((state: RootState) => state.game.players.teamA)
-    const teamB = useSelector((state: RootState) => state.game.players.teamB)
+    const teamA: Object = useSelector((state: RootState) => state.game.teamName.teamA)
+    const teamB: Object = useSelector((state: RootState) => state.game.teamName.teamB)
     console.log("teamA", teamA)
     console.log("teamB", teamB)
 
@@ -58,30 +58,19 @@ const Toss = () => {
     }
 
     return (
-        <div className="w-full h-screen flex justify-center items-center">
-            <div className="border-2 w-4/5 h-4/5 flex flex-col justify-center items-center">
+        <div className="w-full h-screen flex justify-center items-start">
+            <div className="border-2 w-4/5 h-4/5 flex flex-col justify-start items-center">
+
+                <p className="text-center text-2xl">Choose coin toss.</p>
                 <div className="w-full flex">
-                    <div className="border-2 w-1/2" >
-                        {Object.entries(teamA).map((player, index) => {
-                            return (
-                                <div key={index} className="flex justify-center items-center">
-                                    <p>{player}</p>
-                                </div>
-                            )
-                        })}
+                    <div className="border-2 w-40 h-40 border-2 rounded-xl flex justify-center items-center" >
+                        {teamA.teamA}
                     </div>
-                    <div className="border-2 w-1/2" >
-                        {Object.entries(teamB).map((player, index) => {
-                            return (
-                                <div key={index} className="flex justify-center items-center">
-                                    <p>{player}</p>
-                                </div>
-                            )
-                        })}
+                    <div className="border-2 w-1/2 text-center flex justify-center items-center" >
+                        {teamB.teamB}
                     </div>
                 </div>
-                <p className="text-center text-2xl">Choose coin toss.</p>
-                <div className="w-4/5 h-4/5 border-2 flex gap-8 justify-center items-center">
+                <div className="w-4/5 h-1/5 border-2 flex gap-8 mt-8 justify-center items-center">
 
                     <button className={selectedSide == 'heads' ? "card selected-card" : "card"}
                         disabled={isTossDone == true ? true : false}
@@ -104,11 +93,16 @@ const Toss = () => {
                 <p>Toss side appeared : {tossSideAppeared}</p>
                 {tossResult != "" ? <p>Toss result : {tossResult}</p> : ""}
                 <div className="w-full flex justify-end">
-                    <Button variant="default">
+                    {tossResult == "win" ? <Button variant="default">
                         <Link to="/choose-bat-bowl">
                             Next
                         </Link>
-                    </Button>
+                    </Button> : <Button variant="default">
+                        <Link to="/opponent">
+                            Next
+                        </Link>
+                    </Button>}
+
                 </div>
             </div>
         </div>

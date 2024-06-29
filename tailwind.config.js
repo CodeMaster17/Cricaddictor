@@ -18,6 +18,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        light_blue: "#1479EA",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -72,6 +73,15 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      // for all screens mobile to desktop
+      screens: {
+        xs: "375px",
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],
