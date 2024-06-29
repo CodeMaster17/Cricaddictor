@@ -51,7 +51,7 @@ const TeamName = () => {
 
     return (
         <>
-            <div className='w-4/5 h-[350px] border-2 mt-8'>
+            <div className='w-4/5 h-[350px] mt-8'>
                 <p>Choose team names</p>
                 <div className="mt-4">
                     <Form {...form}>
@@ -66,9 +66,9 @@ const TeamName = () => {
                                         <FormControl>
                                             <Input placeholder="Your team name" {...field} />
                                         </FormControl>
-                                        <FormDescription>
-                                            This is your public display name.
-                                        </FormDescription>
+                                        {/* <FormDescription>
+                                            This is your team name.
+                                        </FormDescription> */}
                                         <FormMessage />
                                     </FormItem>
                                 )}
@@ -83,9 +83,9 @@ const TeamName = () => {
                                         <FormControl>
                                             <Input placeholder="Opponent team name" {...field} />
                                         </FormControl>
-                                        <FormDescription>
+                                        {/* <FormDescription>
                                             This is your public display name.
-                                        </FormDescription>
+                                        </FormDescription> */}
                                         <FormMessage />
                                     </FormItem>
                                 )}

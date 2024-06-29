@@ -261,37 +261,36 @@ const UserBattingFirst = () => {
             </AlertDialog>
 
             <div className="w-full h-screen flex justify-center items-start mt-2">
-                <div className="border-2 lg:w-3/5 xs:w-[90%] h-4/5 flex flex-col items-center">
-                    <div className="w-full flex justify-between items-center border-2">
-                        <div className="w-2/5 flex flex-col justify-center items-center">
-                            <div className="border-2 w-40 h-40 border-2 rounded-xl">
+                <div className=" lg:w-3/5 xs:w-[90%] h-4/5 flex flex-col items-center">
+                    <div className="w-full flex justify-between items-center ">
+                        <div className="w-2/5 flex flex-col justify-center items-center mt-4">
+                            <div className="shadow-shadow_custom2 size-32 flex justify-center items-center rounded-xl">
                                 <p className="text-2xl">{team.teamA}</p>
                             </div>
-                            <p>{userRuns}/{userWickets}</p>
+                            <p className="mt-2">{userRuns}/{userWickets}</p>
                             <p>{userOvers}.{userBalls}/{totalOVers}(ov)</p>
                         </div>
                         <div>
-                            <img src="/versus.png" alt="versus" className="w-20 h-20" />
+                            <img src="/versus.png" alt="versus" className="w-16 h-16" />
                         </div>
                         <div className="w-2/5 flex flex-col justify-center items-center">
-                            <div className="border-2 w-40 h-40 border-2 rounded-xl">
+                            <div className="shadow-shadow_custom2 size-32 flex justify-center items-center rounded-xl">
                                 <p className="text-2xl">{team.teamB}</p>
                             </div>
                             {gameStatus === USER_BOWLING || gameStatus === GAME_END ? <>
-                                <p>{cpuRuns}/{cpuWickets}</p>
-                                <p>{cpuOvers}.{cpuBalls}/{totalOVers}(ov)</p>
-                            </> : <p>Yet to bat</p>}
+                                <p className="mt-2"> {cpuRuns}/{cpuWickets}</p>
+                            </> : <p className="mt-2">Yet to bat</p>}
                             <p>{cpuOvers}.{cpuBalls}/{totalOVers}(ov)</p>
                         </div>
                     </div>
 
-                    <div className="w-full border-2 flex flex-col gap-8">
+                    <div className="w-full  flex flex-col gap-8 shadow-shadow_custom2 rounded-xl p-4 mt-4">
                         <p className="text-center">Select runs you want to score.</p>
                         <div className="w-full flex gap-8 flex-wrap items-center justify-center">
                             {runButtons.map((item, index) => (
                                 <button
                                     key={index}
-                                    className="w-1/6 h-16 border-2 border-red-500 hover:bg-red-400"
+                                    className="w-1/6 h-16 border-2 rounded-md border-red-500 hover:bg-red-400"
                                     onClick={() => guessedNumberHandler(item.value)}
                                 >
                                     {item.name}
@@ -299,11 +298,11 @@ const UserBattingFirst = () => {
                             ))}
                         </div>
                     </div>
-                    <p className="text-center">The runs will be added to scoreboard until you and the CPU get the same number.</p>
+                    <p className="text-center mt-4">The runs will be added to scoreboard until you and the CPU get the same number.</p>
                     <p className="text-center mt-2">If you and CPU get the same number, you are out!!!</p>
-                    <div className="w-full mt-2 flex justify-between items-center border-2">
+                    <div className="w-full mt-2 flex justify-between items-center ">
                         <div className="w-2/5 flex flex-col justify-center items-center">
-                            <div className="border-2 w-20 h-20 border-2 rounded-xl">
+                            <div className=" w-20 h-20  rounded-xl shadow-shadow_custom2 flex justify-center items-center">
                                 <p className="text-2xl">{guessedNumber}</p>
                             </div>
                         </div>
@@ -311,7 +310,7 @@ const UserBattingFirst = () => {
                             <video src="/Cricket Ball.mp4" className="w-20 h-20"></video>
                         </div>
                         <div className="w-2/5 flex flex-col justify-center items-center">
-                            <div className="border-2 w-20 h-20 border-2 rounded-xl">
+                            <div className=" w-20 h-20  rounded-xl shadow-shadow_custom2 flex justify-center items-center">
                                 <p className="text-2xl">{cpuNumber}</p>
                             </div>
                         </div>

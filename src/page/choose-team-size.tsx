@@ -22,11 +22,10 @@ const ChooseTeamSize = () => {
 
     return (
         <div className="w-full h-screen flex justify-center items-start">
-            <div className="w-[90%] h-3/5 flex  flex-col justify-center items-center shadow-shadow_custom">
+            <div className="w-[90%] h-2/5 mt-8 flex  flex-col justify-center items-center shadow-shadow_custom2 rounded-md">
                 <p className="text-center text-2xl">Choose team size</p>
-                <p>{gameState}</p>
                 <br />
-                <div className="w-full flex flex-row flex-wrap gap-2 border-2 p-2 justify-between">
+                <div className="w-full flex flex-row flex-wrap gap-2 p-2 justify-between">
                     <button className={buttonClicked && buttonClickedId === 2 ? "selected_button text-black" : "text-black button"}
                         onClick={() => clickHandler(2)}>
                         2
@@ -46,7 +45,7 @@ const ChooseTeamSize = () => {
                         11
                     </button>
                 </div>
-                <div className="w-full flex justify-end border-2 mt-8 p-4">
+                <div className="w-full flex justify-end  mt-8 p-4">
                     <Button variant="default">
                         <Link to="/my-team">
                             Next
