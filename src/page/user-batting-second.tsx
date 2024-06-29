@@ -28,15 +28,16 @@ const UserBattingSecond = () => {
     const [cpuOvers, setCpuOvers] = useState<number>(0);
     const [cpuBalls, setCpuBalls] = useState<number>(0);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
-    const [totalOVers, setTotalOvers] = useState<number>(2);
+    const [totalOVers] = useState<number>(2);
 
 
     const [userEndInninngModal, setUserEndInningModal] = useState(false)
     const [gameEndModal, setGameEndModal] = useState(false)
     const [resultDescription, setResultDescription] = useState<string>("")
 
-    const teamA = useSelector((state: RootState) => state.game.teamName.teamA);
-    const teamB = useSelector((state: RootState) => state.game.teamName.teamB);
+    // const teamA = useSelector((state: RootState) => state.game.teamName.teamA);
+    // const teamB = useSelector((state: RootState) => state.game.teamName.teamB);
+    const team = useSelector((state: RootState) => state.game.teamName);
 
     const modalHandler = () => {
         setGameStatus(CPU_BATTING_START)
@@ -257,7 +258,7 @@ const UserBattingSecond = () => {
                         <div className="w-2/5 flex flex-col justify-center items-center">
                             <div className="border-2 w-40 h-40 border-2 rounded-xl">
                                 <p className="text-2xl">
-                                    {teamA.teamA}
+                                    {team.teamA}
                                 </p>
                             </div>
                             {gameStatus === USER_BOWLING || gameStatus === GAME_END ? <>
@@ -271,7 +272,7 @@ const UserBattingSecond = () => {
                         </div>
                         <div className="w-2/5 flex flex-col justify-center items-center">
                             <div className="border-2 w-40 h-40 border-2 rounded-xl">
-                                <p className="text-2xl">{teamB.teamB}</p>
+                                <p className="text-2xl">{team.teamB}</p>
                             </div>
                             <p>{cpuRuns}/{cpuWickets}</p>
                             <p>{cpuOvers}.{cpuBalls}/{totalOVers}(ov)</p>

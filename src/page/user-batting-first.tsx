@@ -28,7 +28,7 @@ const UserBattingFirst = () => {
     const [cpuOvers, setCpuOvers] = useState<number>(1);
     const [cpuBalls, setCpuBalls] = useState<number>(0);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
-    const [totalOVers, setTotalOvers] = useState<number>(2);
+    const [totalOVers] = useState<number>(2);
 
 
     const [userEndInninngModal, setUserEndInningModal] = useState(false)
@@ -37,10 +37,6 @@ const UserBattingFirst = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    interface teamObject {
-        teamA: string;
-    }
 
     // const teamA = useSelector((state: RootState) => state.game.teamName.teamA);
     // const teamB = useSelector((state: RootState) => state.game.teamName.teamB);

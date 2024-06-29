@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { AppDispatch, store } from "../../redux/store/store"
+import { AppDispatch } from "../../redux/store/store"
 import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 import { Button } from "../components/ui/button"
