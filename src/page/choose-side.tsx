@@ -7,7 +7,6 @@ import { Button } from "../components/ui/button"
 
 const ChooseSide = () => {
 
-    console.log("choosen Side", store.getState())
     const [selectedSide, setSelectedSide] = useState("")
     const dispatch = useDispatch<AppDispatch>()
     const selectionHandler = (side: string) => {

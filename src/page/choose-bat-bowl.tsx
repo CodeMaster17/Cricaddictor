@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
-import { store, AppDispatch } from "../../redux/store/store"
+import { AppDispatch } from "../../redux/store/store"
 import { Button } from "../components/ui/button"
 
 type userChoice = "bat" | "bowl" | ""

@@ -6,17 +6,14 @@ import { Button } from "../components/ui/button"
 
 const ChooseTeamSize = () => {
 
-    const [teamSize, setTeamSize] = useState(0)
     const [buttonClicked, setButtonClicked] = useState(false)
     const [buttonClickedId, setButtonClickedId] = useState(0)
     const dispatch = useDispatch<AppDispatch>()
     const gameState = useSelector((state: RootState) => state.game.gameState)
-    const teamSizeState = useSelector((state: RootState) => state.game.teamSize)
 
 
     const clickHandler = (size: number) => {
         console.log(gameState)
-        setTeamSize(size)
         dispatch({ type: "cricaddicor/reducer_setTeamSize", payload: size })
         dispatch({ type: "cricaddicor/reducer_setGameState", payload: "chooseTeam" })
         setButtonClicked(true)
