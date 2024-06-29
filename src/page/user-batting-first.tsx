@@ -12,8 +12,7 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from "../components/ui/alert-dialog";
-import { CPU_BOWLING, GAME_END, MATCH_START, USER_BATTING, USER_BATTING_START, USER_BOWLING, USER_BOWLING_START, runButtons } from "../lib/constants";
-type BattingFirst = "user" | "cpu";
+import { GAME_END, MATCH_START, USER_BATTING, USER_BATTING_START, USER_BOWLING, USER_BOWLING_START, runButtons } from "../lib/constants";
 
 const UserBattingFirst = () => {
     const [guessedRuns, setGuessedRuns] = useState<any[]>([]);
@@ -39,8 +38,14 @@ const UserBattingFirst = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const teamA = useSelector((state: RootState) => state.game.teamName.teamA);
-    const teamB = useSelector((state: RootState) => state.game.teamName.teamB);
+    interface teamObject {
+        teamA: string;
+    }
+
+    // const teamA = useSelector((state: RootState) => state.game.teamName.teamA);
+    // const teamB = useSelector((state: RootState) => state.game.teamName.teamB);
+    const team = useSelector((state: RootState) => state.game.teamName);
+    console.log("teamA", team.teamA)
 
     const modalHandler = () => {
         setGameStatus(USER_BATTING_START)
@@ -107,8 +112,8 @@ const UserBattingFirst = () => {
                         setUserEndInningModal(true)
                     }
                 }
-                if (userWickets === teamSize - 1) {
-                    setGameStatus(GAME_END)
+                if (userWickets === teamSize) {
+                    setGameStatus(USER_BOWLING_START)
                 }
                 console.log(userBalls)
             }
@@ -165,7 +170,7 @@ const UserBattingFirst = () => {
                         setGameStatus(GAME_END)
                     }
                 }
-                if (cpuWickets === teamSize - 1) {
+                if (cpuWickets === teamSize) {
                     setGameStatus(GAME_END)
                 }
                 console.log(cpuBalls)
@@ -264,7 +269,7 @@ const UserBattingFirst = () => {
                     <div className="w-full flex justify-between items-center border-2">
                         <div className="w-2/5 flex flex-col justify-center items-center">
                             <div className="border-2 w-40 h-40 border-2 rounded-xl">
-                                <p className="text-2xl">{teamA.teamA}</p>
+                                <p className="text-2xl">{team.teamA}</p>
                             </div>
                             <p>{userRuns}/{userWickets}</p>
                             <p>{userOvers}.{userBalls}/{totalOVers}(ov)</p>
@@ -274,7 +279,7 @@ const UserBattingFirst = () => {
                         </div>
                         <div className="w-2/5 flex flex-col justify-center items-center">
                             <div className="border-2 w-40 h-40 border-2 rounded-xl">
-                                <p className="text-2xl">{teamB.teamB}</p>
+                                <p className="text-2xl">{team.teamB}</p>
                             </div>
                             {gameStatus === USER_BOWLING || gameStatus === GAME_END ? <>
                                 <p>{cpuRuns}/{cpuWickets}</p>

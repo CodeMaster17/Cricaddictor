@@ -125,6 +125,8 @@ const gameSlice = createSlice({
 });
 
 export const {
+  reducer_setTeamNameA,
+  reducer_setTeamNameB,
   reducer_setTeamSize,
   reducer_setPlayerNames_teamA,
   reducer_setPlayerNames_teamB,

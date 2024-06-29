@@ -14,10 +14,8 @@ const Toss = () => {
     const [isTossDone, setIsTossDone] = useState<boolean>(false)
     const dispatch = useDispatch<AppDispatch>()
 
-    const teamA: Object = useSelector((state: RootState) => state.game.teamName.teamA)
-    const teamB: Object = useSelector((state: RootState) => state.game.teamName.teamB)
-    console.log("teamA", teamA)
-    console.log("teamB", teamB)
+    const team = useSelector((state: RootState) => state.game.teamName)
+
 
     const selectionHandler = (side: string) => {
         console.log(side)
@@ -64,10 +62,10 @@ const Toss = () => {
                 <p className="text-center text-2xl">Choose coin toss.</p>
                 <div className="w-full flex">
                     <div className="border-2 w-40 h-40 border-2 rounded-xl flex justify-center items-center" >
-                        {teamA.teamA}
+                        {team.teamA}
                     </div>
                     <div className="border-2 w-1/2 text-center flex justify-center items-center" >
-                        {teamB.teamB}
+                        {team.teamB}
                     </div>
                 </div>
                 <div className="w-4/5 h-1/5 border-2 flex gap-8 mt-8 justify-center items-center">

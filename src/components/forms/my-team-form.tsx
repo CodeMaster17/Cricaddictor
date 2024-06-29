@@ -44,8 +44,8 @@ const TeamName = () => {
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         setIsDisabled(true)
-        dispatch({ type: "cricaddicor/reducer_setTeamNameA", payload: { teamA: values.teamAPlayer1 } })
-        dispatch({ type: "cricaddicor/reducer_setTeamNameB", payload: { teamB: values.teamAPlayer2 } })
+        dispatch({ type: "cricaddicor/reducer_setTeamNameA", payload: values.teamAPlayer1 })
+        dispatch({ type: "cricaddicor/reducer_setTeamNameB", payload: values.teamAPlayer2 })
         navigate('/toss')
     }
 
