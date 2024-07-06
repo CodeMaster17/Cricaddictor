@@ -67,7 +67,7 @@ const UserBattingSecond = () => {
                     setGuessedRuns([...guessedRuns, "W"]);
                 }
                 else {
-                    setCpuRuns(cpuRuns + value);
+                    setCpuRuns(cpuRuns + cpuNumber);
                     setCpuBalls(cpuBalls + 1);
                     setGuessedRuns([...guessedRuns, value]);
                 }

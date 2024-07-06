@@ -13,6 +13,7 @@ import {
     AlertDialogTitle,
 } from "../components/ui/alert-dialog";
 import { GAME_END, MATCH_START, USER_BATTING, USER_BATTING_START, USER_BOWLING, USER_BOWLING_START, runButtons } from "../lib/constants";
+import BallTracker from "../components/Ball-Tracker";
 
 const UserBattingFirst = () => {
     const [guessedRuns, setGuessedRuns] = useState<any[]>([]);
@@ -155,7 +156,7 @@ const UserBattingFirst = () => {
                     setGuessedRuns([...guessedRuns, "W"]);
                 }
                 else {
-                    setCpuRuns(cpuRuns + value);
+                    setCpuRuns(cpuRuns + cpuNumber);
                     setCpuBalls(cpuBalls + 1);
                     setGuessedRuns([...guessedRuns, value]);
                 }
@@ -315,11 +316,7 @@ const UserBattingFirst = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="w-full flex">
-                        {guessedRuns.length > 0 && guessedRuns.map((item, index) => (
-                            <p key={index} className="text-center">{item}</p>
-                        ))}
-                    </div>
+                    <BallTracker guessedRuns={guessedRuns} />
                     {/* {(gameStatus === CPU_ALL_OUT || gameStatus === USER_ALL_OUT) && (
                         <p className="text-center text-2xl">{getResult()}</p>
                     )} */}
