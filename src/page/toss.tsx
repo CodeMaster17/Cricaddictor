@@ -20,7 +20,7 @@ const Toss = () => {
 
     const [selectedSide, setSelectedSide] = useState("heads")
     const [tossResult, setTossResult] = useState<TossResult>()
-    const [tossSideAppeared, setTossSideAppeared] = useState("")
+    const [, setTossSideAppeared] = useState("")
     const [isTossDone, setIsTossDone] = useState<boolean>(false)
     const dispatch = useDispatch<AppDispatch>()
 

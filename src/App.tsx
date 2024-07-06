@@ -34,6 +34,7 @@ function App() {
           <Route path="/game/1" element={<UserBattingFirst />} />
           <Route path="/game/2" element={<UserBattingSecond />} />
           <Route path="/view-score" element={<ViewScore />} />
+          <Route path="*" element={<Home />} />
         </Routes>
       </Router>
     </>
