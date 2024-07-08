@@ -12,10 +12,12 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from "../components/ui/alert-dialog";
-import { CPU_BATTING, CPU_BATTING_START, CPU_BOWLING, CPU_BOWLING_START, GAME_END, MATCH_START, USER_BOWLING, runButtons } from "../lib/constants";
+import { CPU_BATTING, CPU_BATTING_START, CPU_BOWLING, CPU_BOWLING_START, GAME_END, MATCH_START,  USER_BOWLING, runButtons } from "../lib/constants";
+import BallTracker from "../components/Ball-Tracker";
 
 const UserBattingSecond = () => {
     const [guessedRuns, setGuessedRuns] = useState<any[]>([]);
+    const [cpuRunsList, setCPURunsList] = useState<any[]>([]);
     const [userRuns, setUserRuns] = useState<number>(0);
     const [cpuRuns, setCpuRuns] = useState<number>(0);
     const [guessedNumber, setGuessedNumber] = useState<number>(0);
@@ -64,12 +66,12 @@ const UserBattingSecond = () => {
                 if (value === cpuNumber) {
                     setCPUWickets(cpuWickets + 1);
                     setCpuBalls(cpuBalls + 1);
-                    setGuessedRuns([...guessedRuns, "W"]);
+                    setCPURunsList([...cpuRunsList, "W"]);
                 }
                 else {
                     setCpuRuns(cpuRuns + cpuNumber);
                     setCpuBalls(cpuBalls + 1);
-                    setGuessedRuns([...guessedRuns, value]);
+                    setCPURunsList([...cpuRunsList, cpuNumber]);
                 }
                 if (cpuBalls === 5) {
                     setCpuOvers(cpuOvers + 1);
@@ -90,12 +92,12 @@ const UserBattingSecond = () => {
                 if (value === cpuNumber) {
                     setCPUWickets(cpuWickets + 1);
                     setCpuBalls(cpuBalls + 1);
-                    setGuessedRuns([...guessedRuns, "W"]);
+                    setCPURunsList([...cpuRunsList, cpuNumber]);
                 }
                 else {
                     setCpuRuns(cpuRuns + value);
                     setCpuBalls(cpuBalls + 1);
-                    setGuessedRuns([...guessedRuns, value]);
+                    setCPURunsList([...cpuRunsList, cpuNumber]);
                 }
                 if (cpuBalls === 5) {
                     setCpuOvers(cpuOvers + 1);
@@ -311,14 +313,8 @@ const UserBattingSecond = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="w-full flex">
-                        {guessedRuns.length > 0 && guessedRuns.map((item, index) => (
-                            <p key={index} className="text-center">{item}</p>
-                        ))}
-                    </div>
-                    {/* {(gameStatus === CPU_ALL_OUT || gameStatus === USER_ALL_OUT) && (
-                        <p className="text-center text-2xl">{getResult()}</p>
-                    )} */}
+                    {gameStatus === CPU_BOWLING ? <BallTracker guessedRuns={guessedRuns} /> : ""}
+                    {gameStatus === CPU_BATTING ? <BallTracker guessedRuns={cpuRunsList} /> : ""}
                 </div>
             </div>
 

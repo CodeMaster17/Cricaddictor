@@ -17,6 +17,7 @@ import BallTracker from "../components/Ball-Tracker";
 
 const UserBattingFirst = () => {
     const [guessedRuns, setGuessedRuns] = useState<any[]>([]);
+    const [cpuRunsList, setCPURunsList] = useState<any[]>([]);
     const [userRuns, setUserRuns] = useState<number>(0);
     const [cpuRuns, setCpuRuns] = useState<number>(0);
     const [guessedNumber, setGuessedNumber] = useState<number>(0);
@@ -127,12 +128,12 @@ const UserBattingFirst = () => {
                 if (value === cpuNumber) {
                     setCPUWickets(cpuWickets + 1);
                     setCpuBalls(cpuBalls + 1);
-                    setGuessedRuns([...guessedRuns, "W"]);
+                    setCPURunsList([...cpuRunsList, "W"]);
                 }
                 else {
                     setCpuRuns(cpuRuns + value);
                     setCpuBalls(cpuBalls + 1);
-                    setGuessedRuns([...guessedRuns, value]);
+                    setCPURunsList([...cpuRunsList, cpuNumber]);
                 }
                 if (cpuBalls === 5) {
                     setCpuOvers(cpuOvers + 1);
@@ -153,12 +154,12 @@ const UserBattingFirst = () => {
                 if (value === cpuNumber) {
                     setCPUWickets(cpuWickets + 1);
                     setCpuBalls(cpuBalls + 1);
-                    setGuessedRuns([...guessedRuns, "W"]);
+                    setCPURunsList([...cpuRunsList, "W"]);
                 }
                 else {
                     setCpuRuns(cpuRuns + cpuNumber);
                     setCpuBalls(cpuBalls + 1);
-                    setGuessedRuns([...guessedRuns, value]);
+                    setCPURunsList([...cpuRunsList, cpuNumber]);
                 }
                 if (cpuBalls === 5) {
                     setCpuOvers(cpuOvers + 1);
@@ -316,10 +317,9 @@ const UserBattingFirst = () => {
                             </div>
                         </div>
                     </div>
-                    <BallTracker guessedRuns={guessedRuns} />
-                    {/* {(gameStatus === CPU_ALL_OUT || gameStatus === USER_ALL_OUT) && (
-                        <p className="text-center text-2xl">{getResult()}</p>
-                    )} */}
+                    {gameStatus === USER_BATTING ? <BallTracker guessedRuns={guessedRuns} /> : ""}
+                    {gameStatus === USER_BOWLING ? <BallTracker guessedRuns={cpuRunsList} /> : ""}
+
                 </div>
             </div>
 
