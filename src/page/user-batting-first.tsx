@@ -14,6 +14,7 @@ import {
 } from "../components/ui/alert-dialog";
 import { GAME_END, MATCH_START, USER_BATTING, USER_BATTING_START, USER_BOWLING, USER_BOWLING_START, runButtons } from "../lib/constants";
 import BallTracker from "../components/Ball-Tracker";
+import TeamScoreHead from "../components/TeamScoreHead";
 
 const UserBattingFirst = () => {
     const [guessedRuns, setGuessedRuns] = useState<any[]>([]);
@@ -265,13 +266,14 @@ const UserBattingFirst = () => {
             <div className="w-full h-screen flex justify-center items-start mt-2">
                 <div className=" lg:w-3/5 xs:w-[90%] h-4/5 flex flex-col items-center">
                     <div className="w-full flex justify-between items-center ">
-                        <div className="w-2/5 flex flex-col justify-center items-center mt-4">
-                            <div className="shadow-shadow_custom2 size-32 flex justify-center items-center rounded-xl">
-                                <p className="text-2xl">{team.teamA}</p>
-                            </div>
-                            <p className="mt-2">{userRuns}/{userWickets}</p>
-                            <p>{userOvers}.{userBalls}/{totalOVers}(ov)</p>
-                        </div>
+                        <TeamScoreHead
+                            teamName={team.teamA}
+                            runs={userRuns}
+                            wickets={userWickets}
+                            overs={userOvers}
+                            balls={userBalls}
+                            total_overs={totalOVers}
+                        />
                         <div>
                             <img src="/versus.png" alt="versus" className="w-16 h-16" />
                         </div>
@@ -284,6 +286,7 @@ const UserBattingFirst = () => {
                             </> : <p className="mt-2">Yet to bat</p>}
                             <p>{cpuOvers}.{cpuBalls}/{totalOVers}(ov)</p>
                         </div>
+
                     </div>
 
                     <div className="w-full  flex flex-col gap-8 shadow-shadow_custom2 rounded-xl p-4 mt-4">
