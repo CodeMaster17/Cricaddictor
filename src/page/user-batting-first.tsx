@@ -3,18 +3,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../redux/store/store";
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-} from "../components/ui/alert-dialog";
-import { GAME_END, MATCH_START, USER_BATTING, USER_BATTING_START, USER_BOWLING, USER_BOWLING_START, runButtons } from "../lib/constants";
 import BallTracker from "../components/Ball-Tracker";
+import GameAlertDialog from "../components/Game-alert-dialog";
 import TeamScoreHead from "../components/TeamScoreHead";
+import VersusLogo from "../components/Versus-logo";
+import { GAME_END, MATCH_START, USER_BATTING, USER_BATTING_START, USER_BOWLING, USER_BOWLING_START, runButtons } from "../lib/constants";
 
 const UserBattingFirst = () => {
     const [guessedRuns, setGuessedRuns] = useState<any[]>([]);
@@ -220,48 +213,31 @@ const UserBattingFirst = () => {
 
     return (
         <>
-            <AlertDialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-                <AlertDialogContent>
-                    <AlertDialogHeader>
-                        <AlertDialogTitle>Welcome to the Game!</AlertDialogTitle>
-                        <AlertDialogDescription>
-                            The game is about to start. Prepare yourself and choose your runs wisely!
-                        </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                        <AlertDialogAction onClick={() => modalHandler()}>Start</AlertDialogAction>
-                    </AlertDialogFooter>
-                </AlertDialogContent>
-            </AlertDialog>
-
+            <GameAlertDialog
+                open={isModalOpen}
+                onOpenChange={setIsModalOpen}
+                title="Welcome to the Game!"
+                description="The game is about to start. Prepare yourself and choose your runs wisely!"
+                actionText="Start"
+                onActionClick={modalHandler}
+            />
             {/* after  user batting finishes */}
-            <AlertDialog open={userEndInninngModal} onOpenChange={setUserEndInningModal}>
-                <AlertDialogContent>
-                    <AlertDialogHeader>
-                        <AlertDialogTitle>Welcome to the Game!</AlertDialogTitle>
-                        <AlertDialogDescription>
-                            The game is about to start. Prepare yourself and choose your runs wisely!
-                        </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                        <AlertDialogAction onClick={() => userBattingEndModalHanlder()}>Start Bowling</AlertDialogAction>
-                    </AlertDialogFooter>
-                </AlertDialogContent>
-            </AlertDialog>
-
-            <AlertDialog open={gameEndModal} onOpenChange={setGameEndModal}>
-                <AlertDialogContent>
-                    <AlertDialogHeader>
-                        <AlertDialogTitle>Game ends!</AlertDialogTitle>
-                        <AlertDialogDescription>
-                            {resultDescription}
-                        </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                        <AlertDialogAction onClick={() => viewScore()}>View Score</AlertDialogAction>
-                    </AlertDialogFooter>
-                </AlertDialogContent>
-            </AlertDialog>
+            <GameAlertDialog
+                open={userEndInninngModal}
+                onOpenChange={setUserEndInningModal}
+                title="End of Innings!"
+                description="Your batting innings have ended. Get ready to start bowling!"
+                actionText="Start Bowling"
+                onActionClick={userBattingEndModalHanlder}
+            />
+            <GameAlertDialog
+                open={gameEndModal}
+                onOpenChange={setGameEndModal}
+                title="Game Ends!"
+                description={resultDescription}
+                actionText="View Score"
+                onActionClick={viewScore}
+            />
 
             <div className="w-full h-screen flex justify-center items-start mt-2">
                 <div className=" lg:w-3/5 xs:w-[90%] h-4/5 flex flex-col items-center">
@@ -274,9 +250,7 @@ const UserBattingFirst = () => {
                             balls={userBalls}
                             total_overs={totalOVers}
                         />
-                        <div>
-                            <img src="/versus.png" alt="versus" className="w-16 h-16" />
-                        </div>
+                        <VersusLogo />
                         <div className="w-2/5 flex flex-col justify-center items-center">
                             <div className="shadow-shadow_custom2 size-32 flex justify-center items-center rounded-xl">
                                 <p className="text-2xl">{team.teamB}</p>
@@ -285,7 +259,7 @@ const UserBattingFirst = () => {
                                 <p className="mt-2"> {cpuRuns}/{cpuWickets}</p>
                             </> : <p className="mt-2">Yet to bat</p>}
                             <p>{cpuOvers}.{cpuBalls}/{totalOVers}(ov)</p>
-                        </div>
+                            V</div>
 
                     </div>
 
