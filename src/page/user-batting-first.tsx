@@ -259,7 +259,7 @@ const UserBattingFirst = () => {
                                 <p className="mt-2"> {cpuRuns}/{cpuWickets}</p>
                             </> : <p className="mt-2">Yet to bat</p>}
                             <p>{cpuOvers}.{cpuBalls}/{totalOVers}(ov)</p>
-                            V</div>
+                        </div>
 
                     </div>
 
