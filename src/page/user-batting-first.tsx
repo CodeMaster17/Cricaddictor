@@ -7,6 +7,7 @@ import BallTracker from "../components/Ball-Tracker";
 import GameAlertDialog from "../components/Game-alert-dialog";
 import TeamScoreHead from "../components/TeamScoreHead";
 import VersusLogo from "../components/Versus-logo";
+import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar"
 import { GAME_END, MATCH_START, USER_BATTING, USER_BATTING_START, USER_BOWLING, USER_BOWLING_START, runButtons } from "../lib/constants";
 
 const UserBattingFirst = () => {
@@ -252,8 +253,12 @@ const UserBattingFirst = () => {
                         />
                         <VersusLogo />
                         <div className="w-2/5 flex flex-col justify-center items-center">
-                            <div className="shadow-shadow_custom2 size-32 flex justify-center items-center rounded-xl">
-                                <p className="text-2xl">{team.teamB}</p>
+                            <div className="shadow-shadow_custom2 size-32 flex flex-col justify-center items-center rounded-xl">
+                                <Avatar>
+                                    <AvatarImage sizes="48" src="/avatars/avatar-sepcs-child.jpeg" />
+                                    <AvatarFallback>CN</AvatarFallback>
+                                </Avatar>
+                                <p className="text-lg">{team.teamB}</p>
                             </div>
                             {gameStatus === USER_BOWLING || gameStatus === GAME_END ? <>
                                 <p className="mt-2"> {cpuRuns}/{cpuWickets}</p>
