@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Playwrite+NG+Modern:wght@100..400&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Playwrite+NG+Modern:wght@100..400&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,8 +36,9 @@
 
     --radius: 0.5rem;
 
-    font-family: "Playwrite NG Modern", cursive;
-    font-weight: bold;
+    /* font-family: "Playwrite NG Modern", cursive; */
+    font-family: "Open Sans", sans-serif;
+    /* font-weight: bold; */
   }
 
   .dark {
