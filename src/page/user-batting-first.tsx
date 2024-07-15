@@ -7,7 +7,7 @@ import BallTracker from "../components/Ball-Tracker";
 import GameAlertDialog from "../components/Game-alert-dialog";
 import TeamScoreHead from "../components/TeamScoreHead";
 import VersusLogo from "../components/Versus-logo";
-import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
 import { GAME_END, MATCH_START, USER_BATTING, USER_BATTING_START, USER_BOWLING, USER_BOWLING_START, runButtons } from "../lib/constants";
 
 const UserBattingFirst = () => {
@@ -38,7 +38,6 @@ const UserBattingFirst = () => {
     // const teamA = useSelector((state: RootState) => state.game.teamName.teamA);
     // const teamB = useSelector((state: RootState) => state.game.teamName.teamB);
     const team = useSelector((state: RootState) => state.game.teamName);
-    console.log("teamA", team.teamA)
 
     const modalHandler = () => {
         setGameStatus(USER_BATTING_START)
@@ -57,7 +56,7 @@ const UserBattingFirst = () => {
         if (gameStatus === USER_BATTING_START) {
             setGameStatus(USER_BATTING)
             if (userOvers < totalOVers) {
-                console.log("userOvers", userOvers)
+
                 const cpuNumber = Math.floor(Math.random() * 7);
                 setGuessedNumber(value);
                 setCpuNumber(cpuNumber);
@@ -78,12 +77,10 @@ const UserBattingFirst = () => {
                 if (userWickets === teamSize - 1) {
                     setGameStatus(USER_BOWLING_START)
                 }
-                console.log(userBalls)
             }
         }
         else if (gameStatus === USER_BATTING) {
             if (userOvers < totalOVers) {
-                console.log("userOvers", userOvers)
                 const cpuNumber = Math.floor(Math.random() * 7);
                 setGuessedNumber(value);
                 setCpuNumber(cpuNumber);
@@ -108,7 +105,6 @@ const UserBattingFirst = () => {
                 if (userWickets === teamSize) {
                     setGameStatus(USER_BOWLING_START)
                 }
-                console.log(userBalls)
             }
 
         }
@@ -116,7 +112,6 @@ const UserBattingFirst = () => {
         else if (gameStatus === USER_BOWLING_START) {
             setGameStatus(USER_BOWLING)
             if (cpuOvers < totalOVers) {
-                console.log("cpuOvers", cpuOvers)
                 const cpuNumber = Math.floor(Math.random() * 7);
                 setGuessedNumber(value);
                 setCpuNumber(cpuNumber);
@@ -137,12 +132,10 @@ const UserBattingFirst = () => {
                 if (cpuWickets === teamSize - 1) {
                     setGameStatus(GAME_END)
                 }
-                console.log(cpuBalls)
             }
         }
         else if (gameStatus === USER_BOWLING) {
             if (cpuOvers < totalOVers) {
-                console.log("cpuOvers", cpuOvers)
                 const cpuNumber = Math.floor(Math.random() * 7);
                 setGuessedNumber(value);
                 setCpuNumber(cpuNumber);
@@ -166,7 +159,6 @@ const UserBattingFirst = () => {
                 if (cpuWickets === teamSize) {
                     setGameStatus(GAME_END)
                 }
-                console.log(cpuBalls)
             }
         }
     }
@@ -208,7 +200,6 @@ const UserBattingFirst = () => {
                 setResultDescription("CPU wins")
             }
         }
-        console.log("gameStatus", gameStatus)
     }, [gameStatus, userRuns, cpuRuns])
 
 
