@@ -18,6 +18,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        zomato_red: '#EA4E4E',
         light_blue: "#1479EA",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

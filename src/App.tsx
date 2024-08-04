@@ -1,6 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import './App.css'
-import Navbar from './components/Navbar'
 import Home from './page/Home'
 import UserBattingFirst from './page/user-batting-first'
 import ChooseBatBowl from './page/choose-bat-bowl'
@@ -19,7 +18,7 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar />
+        {/* <Navbar /> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/size-selection" element={<ChooseTeamSize />} />
