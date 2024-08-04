@@ -45,7 +45,19 @@ const ChooseTeamSize = () => {
                         11
                     </button>
                 </div>
-                <div className="w-full flex justify-end  mt-8 p-4">
+                <div className="w-full flex justify-between items-center  mt-8 p-4">
+                    <div>
+                        {
+                            buttonClicked ?
+                                <p>
+                                    Total wickets: {" "}
+                                    <span className="bg-gray-200 p-2 rounded-md">
+                                        {buttonClickedId}
+                                    </span>
+                                </p>
+                                : ""
+                        }
+                    </div>
                     <Button variant="default">
                         <Link to="/my-team">
                             Next
