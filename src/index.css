@@ -89,6 +89,10 @@
   @apply absolute bottom-16 z-20 flex w-full items-center justify-center rounded-lg bg-white pb-2 pt-2 text-zomato_red shadow-lg;
 }
 
+.button-select {
+  @apply w-[49%] border-2 bg-white font-bold text-black rounded-[15px] p-4 text-3xl gap-1 border-black shadow-lg;
+}
+
 /* -- new styles-- */
 
 .button {
