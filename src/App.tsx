@@ -23,7 +23,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/size-selection" element={<ChooseTeamSize />} />
           {/* <Route path="/player-selection" element={<ChooseTeamSize />} /> */}
-          <Route path="/my-team" element={<TeamNameForm />} />
+          <Route path="/team-name-form" element={<TeamNameForm />} />
           <Route path="/opponent-team" element={<OpponentTeam />} />
           <Route path="/choose-side" element={<ChooseSide />} />
           <Route path="/toss" element={<Toss />} />
