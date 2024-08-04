@@ -1,11 +1,10 @@
 
 import { Link } from "react-router-dom"
-
 const Home = () => {
     return (
-        <div className="w-full h-screen flex justify-center items-center p-4">
-            <div className="flex  flex-col justify-center items-center  xs:mt-[-100px] ">
-                <p className="text-3xl text-center">
+        <div className="flex h-screen w-full items-center justify-center">
+            <div className="z-10 flex flex-col items-center justify-center bg-white xs:mt-[-100px]">
+                <p className="text-center text-3xl">
                     Welcome  to
                     <span className="text-[#1479EA]">
                         Cricadictor🏏
@@ -24,7 +23,7 @@ const Home = () => {
                     Play <span className="text-[#1479EA]">anywhere</span>, <span className="text-[#1479EA]">anytime</span>!!!
                 </p>
                 <div className="mt-3">
-                    <button className="text-black selected_button">
+                    <button className="selected_button text-black">
                         <Link to="/size-selection">
                             Start Game
                         </Link>
