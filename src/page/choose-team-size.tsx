@@ -1,8 +1,10 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { AppDispatch, RootState } from "../../redux/store/store"
 import { Button } from "../components/ui/button"
+import { teamSize } from "../lib/constants"
+import Divider from "../components/Divider"
 
 const ChooseTeamSize = () => {
 
@@ -20,50 +22,30 @@ const ChooseTeamSize = () => {
         setButtonClickedId(size)
     }
 
+    const navigate = useNavigate()
+
     return (
-        <div className="w-full h-screen flex justify-center items-start">
-            <div className="w-[90%] h-2/5 mt-8 flex  flex-col justify-center items-center shadow-shadow_custom2 rounded-md">
-                <p className="text-center text-2xl">Choose team size</p>
+        <div className="relative h-screen w-full border-2 bg-zomato_red pl-4 pr-4">
+            <p className="heading mt-8 text-center">CRICADDICTOR</p>
+            <div className="mt-8  h-2/5 w-full  rounded-md border-2 bg-white shadow-shadow_custom2">
+                <p className="text-left text-2xl ml-1 mt-2">CHOOSE TEAM SIZE</p>
                 <br />
-                <div className="w-full flex flex-row flex-wrap gap-2 p-2 justify-between">
-                    <button className={buttonClicked && buttonClickedId === 2 ? "selected_button text-black" : "text-black button"}
-                        onClick={() => clickHandler(2)}>
-                        2
-                    </button>
-                    <button
-                        className={buttonClicked && buttonClickedId === 4 ? "selected_button text-black" : "text-black button"}
-                        onClick={() => clickHandler(4)}>
-                        4
-                    </button>
-                    <button
-                        className={buttonClicked && buttonClickedId === 6 ? "selected_button text-black" : "text-black button"}
-                        onClick={() => clickHandler(6)}>
-                        6
-                    </button>
-                    <button className={buttonClicked && buttonClickedId === 11 ? "selected_button text-black" : "text-black button"}
-                        onClick={() => clickHandler(11)}>
-                        11
-                    </button>
+                <div className="flex w-full flex-wrap justify-between gap-1 p-2">
+                    {teamSize.map((item) => (
+                        <button
+                            key={item.id}
+                            className={`button-select ${buttonClicked && buttonClickedId !== item.size ? "text-black" : "!border-zomato_red !border-2"}`}
+                            onClick={() => clickHandler(item.size)}
+                        >
+                            {item.size}
+                        </button>
+                    ))}
+                    <Divider />
                 </div>
-                <div className="w-full flex justify-between items-center  mt-8 p-4">
-                    <div>
-                        {
-                            buttonClicked ?
-                                <p>
-                                    Total wickets: {" "}
-                                    <span className="bg-gray-200 p-2 rounded-md">
-                                        {buttonClickedId}
-                                    </span>
-                                </p>
-                                : ""
-                        }
-                    </div>
-                    <Button variant="default">
-                        <Link to="/my-team">
-                            Next
-                        </Link>
-                    </Button>
-                </div>
+                <img src="/dhoni.png" alt="hero-img" className="absolute bottom-0" />
+                <button className="button-custom !w-[90%]" onClick={() => navigate("/team-name-form")}>
+                    CHOOSE TEAM NAME
+                </button>
             </div>
         </div>
     )

@@ -39,3 +39,23 @@ export const CPU_BATTING_START = "USER_BATTING_START";
 export const CPU_BATTING = "USER_BATTING";
 export const CPU_BOWLING = "USER_BOWLING";
 export const CPU_BOWLING_START = "USER_BOWLING_START";
+
+// for wickets
+export const teamSize = [
+  {
+    size: 2,
+    id: 1,
+  },
+  {
+    size: 4,
+    id: 2,
+  },
+  {
+    size: 6,
+    id: 3,
+  },
+  {
+    size: 8,
+    id: 4,
+  },
+];
