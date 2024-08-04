@@ -45,8 +45,9 @@ const UserBattingFirst = () => {
     }
 
     const userBattingEndModalHanlder = () => {
+        console.log("Modal appear")
+        setUserEndInningModal(true)
         setGameStatus(USER_BOWLING_START)
-        setUserEndInningModal(false)
     }
 
     const teamSize = useSelector((state: RootState) => state.game.teamSize);
@@ -57,7 +58,8 @@ const UserBattingFirst = () => {
             setGameStatus(USER_BATTING)
             if (userOvers < totalOVers) {
 
-                const cpuNumber = Math.floor(Math.random() * 7);
+                // const cpuNumber = Math.floor(Math.random() * 7);
+                const cpuNumber = 2
                 setGuessedNumber(value);
                 setCpuNumber(cpuNumber);
                 if (value === cpuNumber) {
@@ -81,7 +83,8 @@ const UserBattingFirst = () => {
         }
         else if (gameStatus === USER_BATTING) {
             if (userOvers < totalOVers) {
-                const cpuNumber = Math.floor(Math.random() * 7);
+                // const cpuNumber = Math.floor(Math.random() * 7);
+                const cpuNumber = 2
                 setGuessedNumber(value);
                 setCpuNumber(cpuNumber);
                 if (value === cpuNumber) {
@@ -102,13 +105,14 @@ const UserBattingFirst = () => {
                         setUserEndInningModal(true)
                     }
                 }
-                if (userWickets === teamSize) {
+                if (userWickets === teamSize - 1) {
                     setGameStatus(USER_BOWLING_START)
+                    setUserEndInningModal(true)
                 }
             }
 
         }
-        // cpu batting
+        // --------------------------- cpu batting ---------------------------
         else if (gameStatus === USER_BOWLING_START) {
             setGameStatus(USER_BOWLING)
             if (cpuOvers < totalOVers) {
@@ -231,9 +235,9 @@ const UserBattingFirst = () => {
                 onActionClick={viewScore}
             />
 
-            <div className="w-full h-screen flex justify-center items-start mt-2">
-                <div className=" lg:w-3/5 xs:w-[90%] h-4/5 flex flex-col items-center">
-                    <div className="w-full flex justify-between items-center ">
+            <div className="mt-2 flex h-screen w-full items-start justify-center">
+                <div className="flex h-4/5 flex-col items-center xs:w-[90%] lg:w-3/5">
+                    <div className="flex w-full items-center justify-between">
                         <TeamScoreHead
                             teamName={team.teamA}
                             runs={userRuns}
@@ -243,8 +247,8 @@ const UserBattingFirst = () => {
                             total_overs={totalOVers}
                         />
                         <VersusLogo />
-                        <div className="w-2/5 flex flex-col justify-center items-center">
-                            <div className="shadow-shadow_custom2 size-32 flex flex-col justify-center items-center rounded-xl">
+                        <div className="flex w-2/5 flex-col items-center justify-center">
+                            <div className="flex size-32 flex-col items-center justify-center rounded-xl shadow-shadow_custom2">
                                 <Avatar>
                                     <AvatarImage sizes="48" src="/avatars/avatar-sepcs-child.jpeg" />
                                     <AvatarFallback>CN</AvatarFallback>
@@ -259,13 +263,13 @@ const UserBattingFirst = () => {
 
                     </div>
 
-                    <div className="w-full  flex flex-col gap-8 shadow-shadow_custom2 rounded-xl p-4 mt-4">
+                    <div className="mt-4 flex w-full flex-col gap-8 rounded-xl p-4 shadow-shadow_custom2">
                         <p className="text-center">Select runs you want to score.</p>
-                        <div className="w-full flex gap-8 flex-wrap items-center justify-center">
+                        <div className="flex w-full flex-wrap items-center justify-center gap-8">
                             {runButtons.map((item, index) => (
                                 <button
                                     key={index}
-                                    className="w-1/6 h-16 border-2 rounded-md border-red-500 hover:bg-red-400"
+                                    className="h-16 w-1/6 rounded-md border-2 border-red-500 hover:bg-red-400"
                                     onClick={() => guessedNumberHandler(item.value)}
                                 >
                                     {item.name}
@@ -273,19 +277,19 @@ const UserBattingFirst = () => {
                             ))}
                         </div>
                     </div>
-                    <p className="text-center mt-4">The runs will be added to scoreboard until you and the CPU get the same number.</p>
-                    <p className="text-center mt-2">If you and CPU get the same number, you are out!!!</p>
-                    <div className="w-full mt-2 flex justify-between items-center ">
-                        <div className="w-2/5 flex flex-col justify-center items-center">
-                            <div className=" w-20 h-20  rounded-xl shadow-shadow_custom2 flex justify-center items-center">
+                    <p className="mt-4 text-center">The runs will be added to scoreboard until you and the CPU get the same number.</p>
+                    <p className="mt-2 text-center">If you and CPU get the same number, you are out!!!</p>
+                    <div className="mt-2 flex w-full items-center justify-between">
+                        <div className="flex w-2/5 flex-col items-center justify-center">
+                            <div className="flex h-20 w-20 items-center justify-center rounded-xl shadow-shadow_custom2">
                                 <p className="text-2xl">{guessedNumber}</p>
                             </div>
                         </div>
                         <div>
-                            <video src="/Cricket Ball.mp4" className="w-20 h-20"></video>
+                            <video src="/Cricket Ball.mp4" className="h-20 w-20"></video>
                         </div>
-                        <div className="w-2/5 flex flex-col justify-center items-center">
-                            <div className=" w-20 h-20  rounded-xl shadow-shadow_custom2 flex justify-center items-center">
+                        <div className="flex w-2/5 flex-col items-center justify-center">
+                            <div className="flex h-20 w-20 items-center justify-center rounded-xl shadow-shadow_custom2">
                                 <p className="text-2xl">{cpuNumber}</p>
                             </div>
                         </div>
