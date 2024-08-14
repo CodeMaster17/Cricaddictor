@@ -18,11 +18,13 @@ const CpuChooseBattingBowl = () => {
 
 
   return (
-    <div className="w-full h-screen flex justify-center items-start">
-      <div className="border-2 w-4/5 h-4/5 flex flex-col justify-start mt-8 items-center">
-        Opponet chose to {cpuChoice}
-        <div>
-          <Button variant="default" className='float-right'>
+    <div className="w-full h-screen flex justify-center items-start bg-zomato_red">
+      <div className="w-4/5 h-4/5 flex flex-col justify-start mt-8 items-center">
+        <p className="text-white text-2xl">
+          Opponet chose to {cpuChoice}
+        </p>
+        <div className=''>
+          <Button variant="default" className='float-right text-2xl mt-2'>
             {
               (cpuChoice == 'bowl') ? <Link to="/game/1">Next</Link> : <Link to="/game/2">Next</Link>
             }

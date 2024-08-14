@@ -9,7 +9,7 @@ const CoinSelection = ({
     isTossDone: boolean;
     onSelect: (side: string) => void;
 }) => (
-    <div className="w-4/5 h-1/5 flex gap-8 mt-8 justify-center items-center shadow-shadow_custom2 rounded-xl">
+    <div className="w-4/5 h-1/5 bg-white flex gap-8 mt-8 justify-center items-center shadow-shadow_custom2 rounded-xl">
         <CoinOption
             side="heads"
             selectedSide={selectedSide}

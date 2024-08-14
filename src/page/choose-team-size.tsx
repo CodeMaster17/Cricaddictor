@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { AppDispatch, RootState } from "../../redux/store/store"
 import { teamSize } from "../lib/constants"
 import Divider from "../components/Divider"
-
+import { motion } from 'framer-motion';
 const ChooseTeamSize = () => {
 
     const [buttonClicked, setButtonClicked] = useState(false)
@@ -24,7 +24,12 @@ const ChooseTeamSize = () => {
     const navigate = useNavigate()
 
     return (
-        <div className="relative h-screen w-full border-2 bg-zomato_red pl-4 pr-4">
+        <motion.div
+            initial={{ opacity: 0, x: '100vw' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '-100vw' }}
+            transition={{ duration: 0.5 }}
+            className="relative h-screen w-full border-2 bg-zomato_red pl-4 pr-4">
             <p className="heading mt-8 text-center">CRICADDICTOR</p>
             <div className="mt-8  h-2/5 w-full  rounded-md border-2 bg-white shadow-shadow_custom2">
                 <p className="text-left text-2xl ml-1 mt-2">CHOOSE TEAM SIZE</p>
@@ -46,7 +51,7 @@ const ChooseTeamSize = () => {
                     CHOOSE TEAM NAME
                 </button>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

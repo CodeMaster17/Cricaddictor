@@ -13,29 +13,27 @@ import TeamNameForm from './page/team-name-form'
 import CpuChooseBattingBowl from './page/cpu-choose-batting-bowl'
 import TossPage from './page/TossPage/TossPage'
 function App() {
-
   return (
-    <>
-      <Router>
-        {/* <Navbar /> */}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/size-selection" element={<ChooseTeamSize />} />
-          {/* <Route path="/player-selection" element={<ChooseTeamSize />} /> */}
-          <Route path="/team-name-form" element={<TeamNameForm />} />
-          <Route path="/opponent-team" element={<OpponentTeam />} />
-          <Route path="/choose-side" element={<ChooseSide />} />
-          <Route path="/toss" element={<TossPage />} />
-          <Route path="/opponent" element={<CpuChooseBattingBowl />} />
-          <Route path="/teams" element={<TeamDetails />} />
-          <Route path="/choose-bat-bowl" element={<ChooseBatBowl />} />
-          <Route path="/game/1" element={<UserBattingFirst />} />
-          <Route path="/game/2" element={<UserBattingSecond />} />
-          <Route path="/view-score" element={<ViewScore />} />
-          <Route path="*" element={<Home />} />
-        </Routes>
-      </Router>
-    </>
+    <Router >
+
+      {/* <Navbar /> */}
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Home />} />
+        <Route path="/size-selection" element={<ChooseTeamSize />} />
+        {/* <Route path="/player-selection" element={<ChooseTeamSize />} /> */}
+        <Route path="/team-name-form" element={<TeamNameForm />} />
+        <Route path="/opponent-team" element={<OpponentTeam />} />
+        <Route path="/choose-side" element={<ChooseSide />} />
+        <Route path="/toss" element={<TossPage />} />
+        <Route path="/opponent" element={<CpuChooseBattingBowl />} />
+        <Route path="/teams" element={<TeamDetails />} />
+        <Route path="/choose-bat-bowl" element={<ChooseBatBowl />} />
+        <Route path="/game/1" element={<UserBattingFirst />} />
+        <Route path="/game/2" element={<UserBattingSecond />} />
+        <Route path="/view-score" element={<ViewScore />} />
+        <Route path="*" element={<Home />} />
+      </Routes>
+    </Router>
   )
 }
 
