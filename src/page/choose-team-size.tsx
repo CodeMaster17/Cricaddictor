@@ -1,8 +1,7 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { AppDispatch, RootState } from "../../redux/store/store"
-import { Button } from "../components/ui/button"
 import { teamSize } from "../lib/constants"
 import Divider from "../components/Divider"
 
@@ -34,7 +33,7 @@ const ChooseTeamSize = () => {
                     {teamSize.map((item) => (
                         <button
                             key={item.id}
-                            className={`button-select ${buttonClicked && buttonClickedId !== item.size ? "text-black" : "!border-zomato_red !border-2"}`}
+                            className={`button-select ${buttonClicked && buttonClickedId === item.size ? "text-black !border-zomato_red !border-2" : " "}`}
                             onClick={() => clickHandler(item.size)}
                         >
                             {item.size}
