@@ -8,10 +8,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "../ui/input"
 import { Button } from "../ui/button"
 
-
-
-
-
 // redux
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom"
@@ -51,7 +47,7 @@ const TeamName = () => {
 
     return (
         <>
-            <div className='w-4/5 h-[350px] mt-8'>
+            <div className='w-full px-3 pt-2 '>
                 <p>Choose team names</p>
                 <div className="mt-4">
                     <Form {...form}>
@@ -64,7 +60,7 @@ const TeamName = () => {
                                     <FormItem>
                                         <FormLabel>Your team</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="Your team name" {...field} />
+                                            <Input placeholder="Your team name" className="focus:border-zomato_red" {...field} />
                                         </FormControl>
                                         {/* <FormDescription>
                                             This is your team name.
