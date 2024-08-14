@@ -36,7 +36,7 @@ const Toss = () => {
     const [gameEndModal, setGameEndModal] = useState(false)
     const [resultDescription, setResultDescription] = useState("")
 
-    // fixme: pull out choosen team from redux store and then compare 
+    // fixme: pull out choosen team from redux store and then compare
     const tossHandler = (selectedSide: string) => {
         let number = Math.floor(Math.random() * 2)
         if (number == 0) {
@@ -133,8 +133,6 @@ const Toss = () => {
                     </button>
 
                     <div className="w-full flex justify-end">
-
-
                     </div>
                 </div>
             </div>

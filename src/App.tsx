@@ -7,12 +7,11 @@ import ChooseSide from './page/choose-side'
 import ChooseTeamSize from './page/choose-team-size'
 import OpponentTeam from './page/opponent-team'
 import TeamDetails from './page/team-details'
-import Toss from './page/toss'
 import UserBattingSecond from './page/user-batting-second'
 import ViewScore from './page/view-score'
-
 import TeamNameForm from './page/team-name-form'
 import CpuChooseBattingBowl from './page/cpu-choose-batting-bowl'
+import TossPage from './page/TossPage/TossPage'
 function App() {
 
   return (
@@ -26,7 +25,7 @@ function App() {
           <Route path="/team-name-form" element={<TeamNameForm />} />
           <Route path="/opponent-team" element={<OpponentTeam />} />
           <Route path="/choose-side" element={<ChooseSide />} />
-          <Route path="/toss" element={<Toss />} />
+          <Route path="/toss" element={<TossPage />} />
           <Route path="/opponent" element={<CpuChooseBattingBowl />} />
           <Route path="/teams" element={<TeamDetails />} />
           <Route path="/choose-bat-bowl" element={<ChooseBatBowl />} />
