@@ -2,13 +2,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { RootState } from "../../redux/store/store";
-import BallTracker from "../components/Ball-Tracker";
-import GameAlertDialog from "../components/Game-alert-dialog";
-import TeamScoreHead from "../components/TeamScoreHead";
-import VersusLogo from "../components/Versus-logo";
-import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
-import { GAME_END, MATCH_START, USER_BATTING, USER_BATTING_START, USER_BOWLING, USER_BOWLING_START, runButtons } from "../lib/constants";
+import { RootState } from "../../../redux/store/store";
+import BallTracker from "../../components/Ball-Tracker";
+import GameAlertDialog from "../../components/Game-alert-dialog";
+import TeamScoreHead from "../../components/TeamScoreHead";
+import VersusLogo from "../../components/Versus-logo";
+import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
+import { GAME_END, MATCH_START, USER_BATTING, USER_BATTING_START, USER_BOWLING, USER_BOWLING_START, runButtons } from "../../lib/constants";
+import WicketAnimation from "./WicketAnimation";
 
 const UserBattingFirst = () => {
     const [guessedRuns, setGuessedRuns] = useState<any[]>([]);
@@ -26,7 +27,7 @@ const UserBattingFirst = () => {
     const [cpuBalls, setCpuBalls] = useState<number>(0);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
     const [totalOVers] = useState<number>(2);
-
+    const [wicketAnimation, setWicketAnimation] = useState<boolean>(false);
 
     const [userEndInninngModal, setUserEndInningModal] = useState(false)
     const [gameEndModal, setGameEndModal] = useState(false)
@@ -66,6 +67,14 @@ const UserBattingFirst = () => {
                     setUserWickets(userWickets + 1);
                     setUserBalls(userBalls + 1);
                     setGuessedRuns([...guessedRuns, "W"]);
+                    // Start the wicket animation
+                    setWicketAnimation(true);
+
+                    // Stop the animation after 2 seconds
+                    setTimeout(() => {
+                        setWicketAnimation(false);
+                    }, 3000);
+
                 }
                 else {
                     setUserRuns(userRuns + value);
@@ -91,6 +100,13 @@ const UserBattingFirst = () => {
                     setUserWickets(userWickets + 1);
                     setUserBalls(userBalls + 1);
                     setGuessedRuns([...guessedRuns, "W"]);
+                    // Start the wicket animation
+                    setWicketAnimation(true);
+
+                    // Stop the animation after 2 seconds
+                    setTimeout(() => {
+                        setWicketAnimation(false);
+                    }, 3000);
                 }
                 else {
                     setUserRuns(userRuns + value);
@@ -213,7 +229,10 @@ const UserBattingFirst = () => {
                 open={isModalOpen}
                 onOpenChange={setIsModalOpen}
                 title="Welcome to the Game!"
-                description="The game is about to start. Prepare yourself and choose your runs wisely!"
+                description="The game is about to start. Prepare yourself and choose your runs wisely!
+                The runs will be added to scoreboard until you and the CPU get the same number.
+                If you and CPU get the same number, you are out!!!
+                "
                 actionText="Start"
                 onActionClick={modalHandler}
             />
@@ -234,9 +253,9 @@ const UserBattingFirst = () => {
                 actionText="View Score"
                 onActionClick={viewScore}
             />
-
-            <div className="mt-2 flex h-screen w-full items-start justify-center">
+            {wicketAnimation ? <WicketAnimation /> : <div className=" flex h-screen w-full items-start justify-center bg-zomato_red">
                 <div className="flex h-4/5 flex-col items-center xs:w-[90%] lg:w-3/5">
+                    <p className="heading mt-8 text-center">CRICADDICTOR</p>
                     <div className="flex w-full items-center justify-between">
                         <TeamScoreHead
                             teamName={team.teamA}
@@ -248,7 +267,7 @@ const UserBattingFirst = () => {
                         />
                         <VersusLogo />
                         <div className="flex w-2/5 flex-col items-center justify-center">
-                            <div className="flex size-32 flex-col items-center justify-center rounded-xl shadow-shadow_custom2">
+                            <div className="flex size-32 flex-col items-center justify-center rounded-xl shadow-shadow_custom2 bg-white">
                                 <Avatar>
                                     <AvatarImage sizes="48" src="/avatars/avatar-sepcs-child.jpeg" />
                                     <AvatarFallback>CN</AvatarFallback>
@@ -256,14 +275,14 @@ const UserBattingFirst = () => {
                                 <p className="text-lg">{team.teamB}</p>
                             </div>
                             {gameStatus === USER_BOWLING || gameStatus === GAME_END ? <>
-                                <p className="mt-2"> {cpuRuns}/{cpuWickets}</p>
-                            </> : <p className="mt-2">Yet to bat</p>}
-                            <p>{cpuOvers}.{cpuBalls}/{totalOVers}(ov)</p>
+                                <p className="mt-2 text-white text-xl"> {cpuRuns}/{cpuWickets}</p>
+                            </> : <p className="mt-2 text-white text-xl">Yet to bat</p>}
+                            <p className="text-white text-xl">{cpuOvers}.{cpuBalls}/{totalOVers}(ov)</p>
                         </div>
 
                     </div>
 
-                    <div className="mt-4 flex w-full flex-col gap-8 rounded-xl p-4 shadow-shadow_custom2">
+                    <div className="mt-4 flex w-full flex-col gap-8 rounded-xl p-4 shadow-shadow_custom2 bg-white">
                         <p className="text-center">Select runs you want to score.</p>
                         <div className="flex w-full flex-wrap items-center justify-center gap-8">
                             {runButtons.map((item, index) => (
@@ -277,11 +296,9 @@ const UserBattingFirst = () => {
                             ))}
                         </div>
                     </div>
-                    <p className="mt-4 text-center">The runs will be added to scoreboard until you and the CPU get the same number.</p>
-                    <p className="mt-2 text-center">If you and CPU get the same number, you are out!!!</p>
                     <div className="mt-2 flex w-full items-center justify-between">
                         <div className="flex w-2/5 flex-col items-center justify-center">
-                            <div className="flex h-20 w-20 items-center justify-center rounded-xl shadow-shadow_custom2">
+                            <div className="flex h-20 w-20 items-center justify-center rounded-xl shadow-shadow_custom2 bg-white">
                                 <p className="text-2xl">{guessedNumber}</p>
                             </div>
                         </div>
@@ -289,7 +306,7 @@ const UserBattingFirst = () => {
                             <video src="/Cricket Ball.mp4" className="h-20 w-20"></video>
                         </div>
                         <div className="flex w-2/5 flex-col items-center justify-center">
-                            <div className="flex h-20 w-20 items-center justify-center rounded-xl shadow-shadow_custom2">
+                            <div className="flex h-20 w-20 items-center justify-center rounded-xl shadow-shadow_custom2 bg-white">
                                 <p className="text-2xl">{cpuNumber}</p>
                             </div>
                         </div>
@@ -298,8 +315,7 @@ const UserBattingFirst = () => {
                     {gameStatus === USER_BOWLING ? <BallTracker guessedRuns={cpuRunsList} /> : ""}
 
                 </div>
-            </div>
-
+            </div>}
 
         </>
     );

@@ -23,11 +23,11 @@ const GameAlertDialog: React.FC<GameAlertDialogProps> = ({ open, onOpenChange, t
         <AlertDialog open={open} onOpenChange={onOpenChange}>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>{title}</AlertDialogTitle>
-                    <AlertDialogDescription>{description}</AlertDialogDescription>
+                    <AlertDialogTitle className='text-2xl'>{title}</AlertDialogTitle>
+                    <AlertDialogDescription className='text-lg'>{description}</AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogAction onClick={onActionClick}>{actionText}</AlertDialogAction>
+                    <AlertDialogAction className='bg-zomato_red text-white text-lg' onClick={onActionClick}>{actionText}</AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>
