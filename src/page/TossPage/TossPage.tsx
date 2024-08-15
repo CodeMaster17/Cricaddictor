@@ -6,7 +6,7 @@ import TossResultModal from "./TossResultModal";
 import TeamDisplay from "./TeamDisplay";
 import CoinSelection from "./CoinSelection";
 import { Button } from "@/components/ui/button";
-
+import { motion } from 'framer-motion';
 type TossResult = "win" | "lose" | "";
 
 const TossPage = () => {
@@ -41,7 +41,7 @@ const TossPage = () => {
             setIsTossDone(true);
             setIsLoading(false);
             setGameEndModal(true);
-        }, 1000)
+        }, 2000)
     };
 
     const handleNextPage = () => {
@@ -57,8 +57,13 @@ const TossPage = () => {
                 onNext={handleNextPage}
             /> : ""}
 
-            <div className="w-full h-screen flex justify-center items-start bg-zomato_red">
+            <motion.div
+                initial={{ opacity: 0, x: '100vw' }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: '-100vw' }}
+                transition={{ duration: 0.5 }} className="w-full h-screen flex justify-center items-start bg-zomato_red">
                 <div className="w-4/5 h-4/5 flex flex-col justify-start items-center">
+                    <p className="heading mt-8 text-center">CRICADDICTOR</p>
                     <p className="text-center text-2xl mt-8 text-white">Choose coin toss.</p>
                     <TeamDisplay team={team} />
                     <CoinSelection
@@ -66,15 +71,21 @@ const TossPage = () => {
                         isTossDone={isTossDone}
                         onSelect={handleSelection}
                     />
+
+                    {isTossDone || isLoading ?
+                        <iframe src="https://lottie.host/embed/18e10324-42b1-42b4-bc98-ab839f132a59/AWcOKCwdUw.json"></iframe>
+                        : ""}
                     <Button
-                        className="mt-8 bg-white text-zomato_red text-lg"
+                        className="mt-8 !bg-white text-zomato_red text-lg"
                         onClick={handleToss}
                         disabled={isTossDone}
                     >
-                        {isTossDone || isLoading ? "Flipping the coin..." : "Toss"}
+                        {isTossDone || isLoading ?
+                            "Flipping the coin.."
+                            : "Toss"}
                     </Button>
                 </div>
-            </div>
+            </motion.div>
         </>
     );
 };
