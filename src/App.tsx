@@ -9,8 +9,8 @@ import OpponentTeam from './page/opponent-team'
 import TeamDetails from './page/team-details'
 import UserBattingSecond from './page/user-batting-second'
 import ViewScore from './page/view-score'
-import TeamNameForm from './page/team-name-form'
-import CpuChooseBattingBowl from './page/cpu-choose-batting-bowl'
+import TeamNameForm from './page/TeamNamePage/team-name-form'
+import CpuChooseBattingBowl from './page/CPUChooseBattingBowling/cpu-choose-batting-bowl'
 import TossPage from './page/TossPage/TossPage'
 function App() {
   return (
