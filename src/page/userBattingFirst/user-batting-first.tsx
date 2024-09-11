@@ -60,7 +60,7 @@ const UserBattingFirst = () => {
             if (userOvers < totalOVers) {
 
                 // const cpuNumber = Math.floor(Math.random() * 7);
-                const cpuNumber = 2
+                const cpuNumber = Math.floor(Math.random() * 7)
                 setGuessedNumber(value);
                 setCpuNumber(cpuNumber);
                 if (value === cpuNumber) {
@@ -93,7 +93,7 @@ const UserBattingFirst = () => {
         else if (gameStatus === USER_BATTING) {
             if (userOvers < totalOVers) {
                 // const cpuNumber = Math.floor(Math.random() * 7);
-                const cpuNumber = 2
+                const cpuNumber = Math.floor(Math.random() * 7)
                 setGuessedNumber(value);
                 setCpuNumber(cpuNumber);
                 if (value === cpuNumber) {
