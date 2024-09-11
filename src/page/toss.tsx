@@ -28,7 +28,6 @@ const Toss = () => {
 
 
     const selectionHandler = (side: string) => {
-        console.log(side)
         setSelectedSide(side)
         // dispatch({ type: "cricaddicor/reducer_chooseSide", payload: side })
     }
@@ -40,14 +39,11 @@ const Toss = () => {
     const tossHandler = (selectedSide: string) => {
         let number = Math.floor(Math.random() * 2)
         if (number == 0) {
-            console.log("Tails")
             if (selectedSide == "tails") {
-                console.log("You win the toss")
                 setTossResult("win")
                 setResultDescription("You won the toss")
                 dispatch({ type: "cricaddicor/reducer_setToss", payload: { winner: "teamA", choice: selectedSide } })
             } else {
-                console.log("You lose the toss")
                 setTossResult("lose")
                 setResultDescription("You lose the toss")
                 dispatch({ type: "cricaddicor/reducer_setToss", payload: { winner: "teamB", choice: "heads" } })
@@ -56,18 +52,15 @@ const Toss = () => {
         }
         else {
             if (selectedSide == "heads") {
-                console.log("You win the toss")
                 setTossResult("win")
                 setResultDescription("You won the toss")
                 dispatch({ type: "cricaddicor/reducer_setToss", payload: { winner: "teamA", choice: selectedSide } })
             } else {
-                console.log("You lose the toss")
                 setTossResult("lose")
                 setResultDescription("You lose the toss")
                 dispatch({ type: "cricaddicor/reducer_setToss", payload: { winner: "teamB", choice: "tails" } })
             }
             setTossSideAppeared("heads")
-            console.log("Heads")
         }
         setGameEndModal(true)
 
@@ -91,7 +84,7 @@ const Toss = () => {
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogAction onClick={() => nextPage()}>Next</AlertDialogAction>
+                        <AlertDialogAction className="bg-zomato_red text-white" onClick={() => nextPage()}>Next</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
