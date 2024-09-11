@@ -72,11 +72,9 @@ const TossPage = () => {
                         onSelect={handleSelection}
                     />
 
-                    {isTossDone || isLoading ?
-                        <iframe src="https://lottie.host/embed/18e10324-42b1-42b4-bc98-ab839f132a59/AWcOKCwdUw.json"></iframe>
-                        : ""}
+
                     <Button
-                        className="mt-8 !bg-white text-zomato_red text-lg"
+                        className="mt-8 w-full !bg-white text-zomato_red text-lg"
                         onClick={handleToss}
                         disabled={isTossDone}
                     >
@@ -84,6 +82,9 @@ const TossPage = () => {
                             "Flipping the coin.."
                             : "Toss"}
                     </Button>
+                    {isTossDone || isLoading ?
+                        <iframe src="https://lottie.host/embed/18e10324-42b1-42b4-bc98-ab839f132a59/AWcOKCwdUw.json"></iframe>
+                        : ""}
                 </div>
             </motion.div>
         </>
