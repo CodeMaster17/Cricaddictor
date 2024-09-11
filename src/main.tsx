@@ -8,6 +8,8 @@ import { PersistGate } from "redux-persist/integration/react"
 
 const container = document.getElementById("root")
 
+
+
 if (container) {
   const root = createRoot(container)
   console.log(store.getState())
@@ -16,6 +18,7 @@ if (container) {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <App />
+
         </PersistGate>
       </Provider>
     </React.StrictMode>,

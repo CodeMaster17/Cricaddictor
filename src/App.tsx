@@ -12,12 +12,30 @@ import ViewScore from './page/view-score'
 import TeamNameForm from './page/TeamNamePage/team-name-form'
 import CpuChooseBattingBowl from './page/CPUChooseBattingBowling/cpu-choose-batting-bowl'
 import TossPage from './page/TossPage/TossPage'
-function App() {
-  return (
-    <Router >
+import { useEffect, useState } from 'react'
 
-      {/* <Navbar /> */}
-      <Routes location={location} key={location.pathname}>
+
+
+
+
+function App() {
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Adjust width as needed
+    };
+
+    handleResize(); // Check on mount
+    window.addEventListener('resize', handleResize); // Listen for window resize
+
+    return () => window.removeEventListener('resize', handleResize); // Cleanup
+  }, []);
+
+  return isMobile ? (
+    <Router>
+      <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/size-selection" element={<ChooseTeamSize />} />
         <Route path="/team-name-form" element={<TeamNameForm />} />
@@ -33,7 +51,11 @@ function App() {
         <Route path="*" element={<Home />} />
       </Routes>
     </Router>
-  )
+  ) : (
+    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+      <h2>Please open this app on a mobile device for the best experience.</h2>
+    </div>
+  );
 }
 
 export default App
