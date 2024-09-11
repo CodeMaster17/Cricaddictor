@@ -20,7 +20,6 @@ function App() {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/size-selection" element={<ChooseTeamSize />} />
-        {/* <Route path="/player-selection" element={<ChooseTeamSize />} /> */}
         <Route path="/team-name-form" element={<TeamNameForm />} />
         <Route path="/opponent-team" element={<OpponentTeam />} />
         <Route path="/choose-side" element={<ChooseSide />} />
