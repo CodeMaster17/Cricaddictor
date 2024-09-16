@@ -1,12 +1,10 @@
 import TeamCard from "./TeamCard";
+
 const bounceTransition = {
-    y: {
-        duration: 0.6,
-        yoyo: Infinity, // makes the animation repeat
-        repeat: Infinity, // repeat infinitely
-        repeatType: "loop", // loop the animation
-        ease: "easeInOut",
-    },
+    duration: 2, // Adjust duration for smoothness
+    repeat: Infinity, // Repeat infinitely
+    repeatType: "mirror" as const, // Reverses animation for zoom in and out effect
+    ease: "easeInOut" as const, // Smooth easing function
 };
 import { motion } from 'framer-motion';
 const TeamDisplay = ({ team }: { team: { teamA: string; teamB: string } }) => (
@@ -18,8 +16,8 @@ const TeamDisplay = ({ team }: { team: { teamA: string; teamB: string } }) => (
                 src="/versus.png"
                 alt="versus"
                 className="size-16"
-                animate={{ y: ["-10%", "-20%"] }} // bounce up and down
-                transition={bounceTransition} // apply the bounce transition
+                animate={{ scale: [1, 1.2] }} // Zoom in (1 -> 1.2) and out
+                transition={bounceTransition} // Apply the zoom transition
             />
             <TeamCard teamName={team.teamB} />
         </div>

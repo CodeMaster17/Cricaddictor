@@ -7,6 +7,7 @@ import TeamDisplay from "./TeamDisplay";
 import CoinSelection from "./CoinSelection";
 import { Button } from "@/components/ui/button";
 import { motion } from 'framer-motion';
+import Heading from "@/components/Heading";
 type TossResult = "win" | "lose" | "";
 
 const TossPage = () => {
@@ -63,8 +64,8 @@ const TossPage = () => {
                 exit={{ opacity: 0, x: '-100vw' }}
                 transition={{ duration: 0.5 }} className="w-full h-screen flex justify-center items-start bg-zomato_red">
                 <div className="w-4/5 h-4/5 flex flex-col justify-start items-center">
-                    <p className="heading mt-8 text-center">CRICADDICTOR</p>
-                    <p className="text-center text-2xl mt-8 text-white">Choose coin toss.</p>
+                    <Heading />
+                    <p className="text-center text-2xl mt-8 text-white">TOSS COIN</p>
                     <TeamDisplay team={team} />
                     <CoinSelection
                         selectedSide={selectedSide}
@@ -83,7 +84,8 @@ const TossPage = () => {
                             : "Toss"}
                     </Button>
                     {isTossDone || isLoading ?
-                        <iframe src="https://lottie.host/embed/18e10324-42b1-42b4-bc98-ab839f132a59/AWcOKCwdUw.json"></iframe>
+                        <iframe src="https://lottie.host/embed/18e10324-42b1-42b4-bc98-ab839f132a59/AWcOKCwdUw.json">
+                        </iframe>
                         : ""}
                 </div>
             </motion.div>
