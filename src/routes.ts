@@ -1,0 +1,1 @@
+export const ROUTE_TOSS_PAGE = "/toss";

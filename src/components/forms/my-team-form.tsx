@@ -1,24 +1,24 @@
 
 
+import { errorMessage } from "@/constants/errorMessage"
+import { ROUTE_TOSS_PAGE } from "@/routes"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
+import { useDispatch } from "react-redux"
 import { z } from "zod"
+import { usePageNavigation } from "../../hooks/usePageNavigation"
+import NextButton from "../NextButton"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { Input } from "../ui/input"
 
-// redux
-import { useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom"
-import NextButton from "../NextButton"
-
 
 const formSchema = z.object({
-    teamAPlayer1: z.string().min(2, {
-        message: "Username must be at least 2 characters.",
+    USER_TEAM: z.string().min(2, {
+        message: errorMessage.MIN_USERNAME_CHARACTERS,
     }),
-    teamAPlayer2: z.string().min(2, {
-        message: "Username must be at least 2 characters.",
+    OPPONENT_TEAM: z.string().min(2, {
+        message: errorMessage.MIN_USERNAME_CHARACTERS,
     }),
 
 })
@@ -26,23 +26,23 @@ const formSchema = z.object({
 const TeamName = () => {
 
     const [isDisabled, setIsDisabled] = useState(false)
-    const navigate = useNavigate()
+
     // redux
     const dispatch = useDispatch();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            teamAPlayer1: "",
-            teamAPlayer2: "",
+            USER_TEAM: "",
+            OPPONENT_TEAM: "",
         },
     })
 
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         setIsDisabled(true)
-        dispatch({ type: "cricaddicor/reducer_setTeamNameA", payload: values.teamAPlayer1 })
-        dispatch({ type: "cricaddicor/reducer_setTeamNameB", payload: values.teamAPlayer2 })
-        navigate('/toss')
+        dispatch({ type: "cricaddicor/reducer_setTeamNameA", payload: values.USER_TEAM })
+        dispatch({ type: "cricaddicor/reducer_setTeamNameB", payload: values.OPPONENT_TEAM })
+        usePageNavigation({ route: ROUTE_TOSS_PAGE })
     }
 
     return (
@@ -54,16 +54,13 @@ const TeamName = () => {
                             <FormField
                                 disabled={isDisabled}
                                 control={form.control}
-                                name="teamAPlayer1"
+                                name="USER_TEAM"
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Your team</FormLabel>
                                         <FormControl>
                                             <Input placeholder="Your team name" className="focus:border-zomato_red" {...field} />
                                         </FormControl>
-                                        {/* <FormDescription>
-                                            This is your team name.
-                                        </FormDescription> */}
                                         <FormMessage />
                                     </FormItem>
                                 )}
@@ -71,16 +68,13 @@ const TeamName = () => {
                             <FormField
                                 disabled={isDisabled}
                                 control={form.control}
-                                name="teamAPlayer2"
+                                name="OPPONENT_TEAM"
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Opponent team</FormLabel>
                                         <FormControl>
                                             <Input placeholder="Opponent team name" {...field} />
                                         </FormControl>
-                                        {/* <FormDescription>
-                                            This is your public display name.
-                                        </FormDescription> */}
                                         <FormMessage />
                                     </FormItem>
                                 )}
