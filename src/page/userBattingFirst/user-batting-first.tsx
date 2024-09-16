@@ -39,7 +39,6 @@ const UserBattingFirst = () => {
     // const teamA = useSelector((state: RootState) => state.game.teamName.teamA);
     // const teamB = useSelector((state: RootState) => state.game.teamName.teamB);
     const team = useSelector((state: RootState) => state.game.teamName);
-
     const modalHandler = () => {
         setGameStatus(USER_BATTING_START)
         setIsModalOpen(false);
