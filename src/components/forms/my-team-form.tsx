@@ -86,7 +86,7 @@ const TeamName = () => {
                                     </FormItem>
                                 )}
                             />
-                            <Button disabled={isDisabled} type="submit" className="float-right">Next</Button>
+                            <Button disabled={isDisabled} type="submit" className="button-custom !w-[90%]">Next</Button>
                         </form>
                     </Form>
                 </div>

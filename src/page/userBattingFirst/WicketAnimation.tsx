@@ -1,5 +1,5 @@
 import Lottie from 'lottie-react';
-import animationData from '../../../public/wicketanimation.json';
+import animationData from '../../assets/wicketanimation.json';
 const WicketAnimation = () => {
     return (
         <div className="w-full h-screen bg-zomato_red flex justify-center items-center">
