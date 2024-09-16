@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux"
 import { AppDispatch } from "../../../redux/store/store"
 import Divider from "../../components/Divider"
 import OversSelectionButton from "./OversSelectionButton"
+import { useNavigate } from "react-router-dom"
 
 const ChooseTeamSize = () => {
 
@@ -15,15 +16,18 @@ const ChooseTeamSize = () => {
 
     const dispatch = useDispatch<AppDispatch>()
 
-    const clickHandler = (size: number) => {
+    const navigate = useNavigate()
 
+    const clickHandler = (size: number) => {
         dispatch({ type: "cricaddicor/reducer_setTeamSize", payload: size })
         dispatch({ type: "cricaddicor/reducer_setGameState", payload: "chooseTeam" })
         setButtonClicked(true)
         setButtonClickedId(size)
     }
 
-
+    const nextButtonHandler = () => {
+        navigate("/team-name-form")
+    }
     return (
         <motion.div
             initial={{ opacity: 0, x: '100vw' }}
@@ -50,7 +54,7 @@ const ChooseTeamSize = () => {
                 <DhoniImage />
 
                 {/* button to next page */}
-                <NextButton navigateLink={(navigate) => navigate("/team-name-form")} text="CHOOSE TEAM NAME" />
+                <NextButton type="button" onClickHandler={nextButtonHandler} text="CHOOSE TEAM NAME" />
 
             </div>
         </motion.div>

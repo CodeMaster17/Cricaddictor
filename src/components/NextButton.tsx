@@ -1,17 +1,18 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import { ArrowRightToLine } from 'lucide-react';
+import React from 'react';
 interface NextButtonProps {
-    navigateLink: (navigate: (path: string) => void) => void
+    onClickHandler?: () => void
     text: string
+    disabled?: boolean,
+    type: "button" | "submit" | "reset"
 
 }
 
-const NextButton: React.FC<NextButtonProps> = ({ text, navigateLink }) => {
-    const navigate = useNavigate()
+const NextButton: React.FC<NextButtonProps> = ({ text, onClickHandler, disabled = false, type = "button" }) => {
+
     return (
-        <button className="button-custom !w-[90%] text-xl"
-            onClick={() => navigateLink(navigate)}>
+        <button disabled={disabled} type={type} className="button-custom !w-[90%] text-xl"
+            onClick={() => onClickHandler}>
             {text} &nbsp; <ArrowRightToLine />
         </button>
     )

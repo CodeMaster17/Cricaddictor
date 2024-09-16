@@ -6,12 +6,12 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { Input } from "../ui/input"
-import { Button } from "../ui/button"
 
 // redux
-import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-// import { setTeamAPlayers } from "../../lib/slice";
+import NextButton from "../NextButton"
+
 
 const formSchema = z.object({
     teamAPlayer1: z.string().min(2, {
@@ -48,7 +48,6 @@ const TeamName = () => {
     return (
         <>
             <div className='w-full px-3 pt-2 '>
-                <p>Choose team names</p>
                 <div className="mt-4">
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -86,7 +85,8 @@ const TeamName = () => {
                                     </FormItem>
                                 )}
                             />
-                            <Button disabled={isDisabled} type="submit" className="button-custom !w-[90%]">Next</Button>
+                            <NextButton type="submit" text="Toss coin"
+                                disabled={isDisabled} />
                         </form>
                     </Form>
                 </div>
