@@ -37,12 +37,14 @@ const TeamName = () => {
         },
     })
 
+    const { navigateToPage } = usePageNavigation({ route: ROUTE_TOSS_PAGE });
+
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         setIsDisabled(true)
         dispatch({ type: "cricaddicor/reducer_setTeamNameA", payload: values.USER_TEAM })
         dispatch({ type: "cricaddicor/reducer_setTeamNameB", payload: values.OPPONENT_TEAM })
-        usePageNavigation({ route: ROUTE_TOSS_PAGE })
+        navigateToPage()
     }
 
     return (
