@@ -11,7 +11,9 @@ import { usePageNavigation } from "../../hooks/usePageNavigation"
 import NextButton from "../NextButton"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { Input } from "../ui/input"
-
+import { Dices } from 'lucide-react';
+import teamNames from '../../constants/teamNames.json'
+import { Button } from "../ui/button"
 
 const formSchema = z.object({
     USER_TEAM: z.string().min(2, {
@@ -39,6 +41,19 @@ const TeamName = () => {
 
     const { navigateToPage } = usePageNavigation({ route: ROUTE_TOSS_PAGE });
 
+    // Function to pick random team names from the JSON file
+    const fillRandomNames = () => {
+        let randomUserTeam = teamNames[Math.floor(Math.random() * teamNames.length)];
+        let randomOpponentTeam = teamNames[Math.floor(Math.random() * teamNames.length)];
+
+        // Ensure the names are not the same
+        while (randomUserTeam === randomOpponentTeam) {
+            randomOpponentTeam = teamNames[Math.floor(Math.random() * teamNames.length)];
+        }
+
+        form.setValue("USER_TEAM", randomUserTeam);
+        form.setValue("OPPONENT_TEAM", randomOpponentTeam);
+    }
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         setIsDisabled(true)
@@ -81,6 +96,11 @@ const TeamName = () => {
                                     </FormItem>
                                 )}
                             />
+                            <Button type="button" className="float-right bg-zomato_red gap-2 text-lg" onClick={fillRandomNames} >
+                                Random
+                                <Dices />
+                            </Button>
+
                             <NextButton type="submit" text="Toss coin"
                                 disabled={isDisabled} />
                         </form>

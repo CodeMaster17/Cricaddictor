@@ -17,12 +17,12 @@ const TeamNameForm = () => {
             <Heading />
 
             <div className="mt-4  h-2/5 w-full  rounded-md border-2 bg-white shadow-shadow_custom2">
-                <div className="mt-8">
-                    <p className="text-2xl text-left text-bold ml-3">Write team names</p>
+                <div className="mt-4">
+                    <p className="text-2xl text-left text-bold ml-3">CHOOSE TEAM NAMES</p>
                 </div>
                 <TeamName />
             </div>
-            <img src="/photo-2.png" alt="hero-img" className="absolute bottom-0" />
+            <img src="/photo-2.png" alt="hero-img" className="absolute bottom-0 w-full max-w-[357px] h-auto sm:max-w-[320px] md:max-w-[400px] lg:max-w-[450px] xl:max-w-[500px]" />
         </motion.div>
     )
 }
