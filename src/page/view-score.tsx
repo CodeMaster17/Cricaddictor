@@ -75,6 +75,9 @@ const ViewScore = () => {
                 <div>
                 </div>
                 <NextButton text="Play Again" type="button" onClickHandler={() => { navigate("/") }} />
+                <p className="text-black mt-2">
+                    Made with ❤️ by a cricket fan
+                </p>
             </div>
         </>
     )
