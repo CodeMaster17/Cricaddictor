@@ -1,6 +1,7 @@
 
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion';
+import NextButton from "@/components/NextButton";
 const Home = () => {
     const navigate = useNavigate()
     return (
@@ -14,12 +15,10 @@ const Home = () => {
                 <p className="heading mt-8">PLAY</p>
                 <p className="heading">CRICADDICTOR</p>
                 <p className="text-[1.5rem] font-thin text-white">Getting bored in office, college or home? But also love cricket? </p>
-                <button className="button-custom" onClick={() => navigate("/size-selection")}>
-                    PLAY NOW
-                </button>
+                <NextButton text="Play Now" type="button" onClickHandler={() => { navigate("/size-selection") }} />
             </div>
-            <img src="/hero-img.png" alt="hero-img" className="absolute bottom-0" />
-        </motion.div>
+            <img src="/hero-img.png" alt="hero-img" className="absolute bottom-0 w-full max-w-[412px] h-auto sm:max-w-[360px] md:max-w-[500px] lg:max-w-[600px] xl:max-w-[700px] sm:h-auto" />
+        </motion.div >
     )
 }
 
