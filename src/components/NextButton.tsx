@@ -12,7 +12,7 @@ const NextButton: React.FC<NextButtonProps> = ({ text, onClickHandler, disabled 
 
     return (
         <button disabled={disabled} type={type} className="button-custom !w-[90%] text-xl"
-            onClick={() => onClickHandler}>
+            onClick={onClickHandler}>
             {text} &nbsp; <ArrowRightToLine />
         </button>
     )
