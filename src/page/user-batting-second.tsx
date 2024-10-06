@@ -1,24 +1,15 @@
 // this file will be for user batting second and cpu batting first
+import GameAlertDialog from "@/components/Game-alert-dialog";
+import TeamScoreHead from "@/components/TeamScoreHead";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import VersusLogo from "@/components/Versus-logo";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../redux/store/store";
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-} from "../components/ui/alert-dialog";
-import { CPU_BATTING, CPU_BATTING_START, CPU_BOWLING, CPU_BOWLING_START, GAME_END, MATCH_START, USER_BOWLING, runButtons } from "../lib/constants";
 import BallTracker from "../components/Ball-Tracker";
-import VersusLogo from "@/components/Versus-logo";
-import TeamScoreHead from "@/components/TeamScoreHead";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { CPU_BATTING, CPU_BATTING_START, CPU_BOWLING, CPU_BOWLING_START, GAME_END, MATCH_START, USER_BOWLING, runButtons } from "../lib/constants";
 import WicketAnimation from "./userBattingFirst/WicketAnimation";
-import GameAlertDialog from "@/components/Game-alert-dialog";
 
 const UserBattingSecond = () => {
     const [guessedRuns, setGuessedRuns] = useState<any[]>([]);

@@ -66,7 +66,7 @@ const ViewScore = () => {
                         </p>
                     </div>
                     <div className="border-2 w-full mt-4"></div>
-                    <div className="flex w-full mt-2 justify-between items-center mt-4">
+                    <div className="flex w-full justify-between items-center mt-4">
                         <p>
                             {result}
                         </p>
