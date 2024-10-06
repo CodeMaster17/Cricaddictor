@@ -138,6 +138,14 @@ const UserBattingFirst = () => {
                     setCPUWickets(cpuWickets + 1);
                     setCpuBalls(cpuBalls + 1);
                     setCPURunsList([...cpuRunsList, "W"]);
+
+                    // Start the wicket animation
+                    setWicketAnimation(true);
+
+                    // Stop the animation after 2 seconds
+                    setTimeout(() => {
+                        setWicketAnimation(false);
+                    }, 3000);
                 }
                 else {
                     setCpuRuns(cpuRuns + value);
@@ -162,6 +170,14 @@ const UserBattingFirst = () => {
                     setCPUWickets(cpuWickets + 1);
                     setCpuBalls(cpuBalls + 1);
                     setCPURunsList([...cpuRunsList, "W"]);
+
+                    // Start the wicket animation
+                    setWicketAnimation(true);
+
+                    // Stop the animation after 2 seconds
+                    setTimeout(() => {
+                        setWicketAnimation(false);
+                    }, 3000);
                 }
                 else {
                     setCpuRuns(cpuRuns + cpuNumber);
@@ -252,69 +268,70 @@ const UserBattingFirst = () => {
                 actionText="View Score"
                 onActionClick={viewScore}
             />
-            {wicketAnimation ? <WicketAnimation /> : <div className=" flex h-screen w-full items-start justify-center bg-zomato_red">
-                <div className="flex h-4/5 flex-col items-center xs:w-[90%] lg:w-3/5">
-                    <p className="heading mt-8 text-center">CRICADDICTOR</p>
-                    <div className="flex w-full items-center justify-between">
-                        <TeamScoreHead
-                            teamName={team.teamA}
-                            runs={userRuns}
-                            wickets={userWickets}
-                            overs={userOvers}
-                            balls={userBalls}
-                            total_overs={totalOVers}
-                        />
-                        <VersusLogo />
-                        <div className="flex w-2/5 flex-col items-center justify-center">
-                            <div className="flex size-32 flex-col items-center justify-center rounded-xl shadow-shadow_custom2 bg-white">
-                                <Avatar>
-                                    <AvatarImage sizes="48" src="/avatars/avatar-sepcs-child.jpeg" />
-                                    <AvatarFallback>CN</AvatarFallback>
-                                </Avatar>
-                                <p className="text-lg">{team.teamB}</p>
+            {wicketAnimation ? <WicketAnimation /> :
+                <div className=" flex h-screen w-full items-start justify-center bg-zomato_red">
+                    <div className="flex h-4/5 flex-col items-center xs:w-[90%] lg:w-3/5">
+                        <p className="heading mt-8 text-center">CRICADDICTOR</p>
+                        <div className="flex w-full items-center justify-between">
+                            <TeamScoreHead
+                                teamName={team.teamA}
+                                runs={userRuns}
+                                wickets={userWickets}
+                                overs={userOvers}
+                                balls={userBalls}
+                                total_overs={totalOVers}
+                            />
+                            <VersusLogo />
+                            <div className="flex w-2/5 flex-col items-center justify-center">
+                                <div className="flex size-32 flex-col items-center justify-center rounded-xl shadow-shadow_custom2 bg-white">
+                                    <Avatar>
+                                        <AvatarImage sizes="48" src="/avatars/avatar-sepcs-child.jpeg" />
+                                        <AvatarFallback>CN</AvatarFallback>
+                                    </Avatar>
+                                    <p className="text-lg">{team.teamB}</p>
+                                </div>
+                                {gameStatus === USER_BOWLING || gameStatus === GAME_END ? <>
+                                    <p className="mt-2 text-white text-xl"> {cpuRuns}/{cpuWickets}</p>
+                                </> : <p className="mt-2 text-white text-xl">Yet to bat</p>}
+                                <p className="text-white text-xl">{cpuOvers}.{cpuBalls}/{totalOVers}(ov)</p>
                             </div>
-                            {gameStatus === USER_BOWLING || gameStatus === GAME_END ? <>
-                                <p className="mt-2 text-white text-xl"> {cpuRuns}/{cpuWickets}</p>
-                            </> : <p className="mt-2 text-white text-xl">Yet to bat</p>}
-                            <p className="text-white text-xl">{cpuOvers}.{cpuBalls}/{totalOVers}(ov)</p>
+
                         </div>
 
-                    </div>
-
-                    <div className="mt-4 flex w-full flex-col gap-8 rounded-xl p-4 shadow-shadow_custom2 bg-white">
-                        <p className="text-center">Select runs you want to score.</p>
-                        <div className="flex w-full flex-wrap items-center justify-center gap-8">
-                            {runButtons.map((item, index) => (
-                                <button
-                                    key={index}
-                                    className="h-16 w-1/6 rounded-md border-2 border-red-500 hover:bg-red-400"
-                                    onClick={() => guessedNumberHandler(item.value)}
-                                >
-                                    {item.name}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                    <div className="mt-2 flex w-full items-center justify-between">
-                        <div className="flex w-2/5 flex-col items-center justify-center">
-                            <div className="flex h-20 w-20 items-center justify-center rounded-xl shadow-shadow_custom2 bg-white">
-                                <p className="text-2xl">{guessedNumber}</p>
+                        <div className="mt-4 flex w-full flex-col gap-8 rounded-xl p-4 shadow-shadow_custom2 bg-white">
+                            <p className="text-center">Select runs you want to score.</p>
+                            <div className="flex w-full flex-wrap items-center justify-center gap-8">
+                                {runButtons.map((item, index) => (
+                                    <button
+                                        key={index}
+                                        className="h-16 w-1/6 rounded-md border-2 border-red-500 hover:bg-red-400"
+                                        onClick={() => guessedNumberHandler(item.value)}
+                                    >
+                                        {item.name}
+                                    </button>
+                                ))}
                             </div>
                         </div>
-                        <div>
-                            <video src="/Cricket Ball.mp4" className="h-20 w-20"></video>
-                        </div>
-                        <div className="flex w-2/5 flex-col items-center justify-center">
-                            <div className="flex h-20 w-20 items-center justify-center rounded-xl shadow-shadow_custom2 bg-white">
-                                <p className="text-2xl">{cpuNumber}</p>
+                        <div className="mt-2 flex w-full items-center justify-between">
+                            <div className="flex w-2/5 flex-col items-center justify-center">
+                                <div className="flex h-20 w-20 items-center justify-center rounded-xl shadow-shadow_custom2 bg-white">
+                                    <p className="text-2xl">{guessedNumber}</p>
+                                </div>
+                            </div>
+                            <div>
+                                <video src="/Cricket Ball.mp4" className="h-20 w-20"></video>
+                            </div>
+                            <div className="flex w-2/5 flex-col items-center justify-center">
+                                <div className="flex h-20 w-20 items-center justify-center rounded-xl shadow-shadow_custom2 bg-white">
+                                    <p className="text-2xl">{cpuNumber}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    {gameStatus === USER_BATTING ? <BallTracker guessedRuns={guessedRuns} /> : ""}
-                    {gameStatus === USER_BOWLING ? <BallTracker guessedRuns={cpuRunsList} /> : ""}
+                        {gameStatus === USER_BATTING ? <BallTracker guessedRuns={guessedRuns} /> : ""}
+                        {gameStatus === USER_BOWLING ? <BallTracker guessedRuns={cpuRunsList} /> : ""}
 
-                </div>
-            </div>}
+                    </div>
+                </div>}
 
         </>
     );

@@ -17,6 +17,8 @@ import BallTracker from "../components/Ball-Tracker";
 import VersusLogo from "@/components/Versus-logo";
 import TeamScoreHead from "@/components/TeamScoreHead";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import WicketAnimation from "./userBattingFirst/WicketAnimation";
+import GameAlertDialog from "@/components/Game-alert-dialog";
 
 const UserBattingSecond = () => {
     const [guessedRuns, setGuessedRuns] = useState<any[]>([]);
@@ -35,6 +37,7 @@ const UserBattingSecond = () => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
     const [totalOVers] = useState<number>(2);
 
+    const [wicketAnimation, setWicketAnimation] = useState<boolean>(false);
 
     const [userEndInninngModal, setUserEndInningModal] = useState(false)
     const [gameEndModal, setGameEndModal] = useState(false)
@@ -62,7 +65,7 @@ const UserBattingSecond = () => {
         if (gameStatus === CPU_BATTING_START) {
             setGameStatus(CPU_BATTING)
             if (cpuOvers < totalOVers) {
-                console.log("cpuOvers", cpuOvers)
+
                 const cpuNumber = Math.floor(Math.random() * 7);
                 setGuessedNumber(value);
                 setCpuNumber(cpuNumber);
@@ -70,6 +73,14 @@ const UserBattingSecond = () => {
                     setCPUWickets(cpuWickets + 1);
                     setCpuBalls(cpuBalls + 1);
                     setCPURunsList([...cpuRunsList, "W"]);
+
+                    // Start the wicket animation
+                    setWicketAnimation(true);
+
+                    // Stop the animation after 2 seconds
+                    setTimeout(() => {
+                        setWicketAnimation(false);
+                    }, 3000);
                 }
                 else {
                     setCpuRuns(cpuRuns + cpuNumber);
@@ -83,12 +94,12 @@ const UserBattingSecond = () => {
                 if (cpuWickets === teamSize - 1) {
                     setGameStatus(CPU_BOWLING_START)
                 }
-                console.log(cpuBalls)
+
             }
         }
         else if (gameStatus === CPU_BATTING) {
             if (cpuOvers < totalOVers) {
-                console.log("cpuOvers", cpuOvers)
+
                 const cpuNumber = Math.floor(Math.random() * 7);
                 setGuessedNumber(value);
                 setCpuNumber(cpuNumber);
@@ -96,6 +107,14 @@ const UserBattingSecond = () => {
                     setCPUWickets(cpuWickets + 1);
                     setCpuBalls(cpuBalls + 1);
                     setCPURunsList([...cpuRunsList, cpuNumber]);
+
+                    // Start the wicket animation
+                    setWicketAnimation(true);
+
+                    // Stop the animation after 2 seconds
+                    setTimeout(() => {
+                        setWicketAnimation(false);
+                    }, 3000);
                 }
                 else {
                     setCpuRuns(cpuRuns + value);
@@ -113,14 +132,14 @@ const UserBattingSecond = () => {
                 if (cpuWickets === teamSize - 1) {
                     setGameStatus(CPU_BOWLING_START)
                 }
-                console.log(cpuBalls)
+
             }
 
         }
         else if (gameStatus === CPU_BOWLING_START) {
             setGameStatus(USER_BOWLING)
             if (userOvers < totalOVers) {
-                console.log("userOvers", userOvers)
+
                 const cpuNumber = Math.floor(Math.random() * 7);
                 setGuessedNumber(value);
                 setCpuNumber(cpuNumber);
@@ -128,6 +147,14 @@ const UserBattingSecond = () => {
                     setUserWickets(userWickets + 1);
                     setCpuBalls(cpuBalls + 1);
                     setGuessedRuns([...guessedRuns, "W"]);
+
+                    // Start the wicket animation
+                    setWicketAnimation(true);
+
+                    // Stop the animation after 2 seconds
+                    setTimeout(() => {
+                        setWicketAnimation(false);
+                    }, 3000);
                 }
                 else {
                     setUserRuns(userRuns + value);
@@ -141,12 +168,12 @@ const UserBattingSecond = () => {
                 if (userWickets === teamSize - 1) {
                     setGameStatus(GAME_END)
                 }
-                console.log(cpuBalls)
+
             }
         }
         else if (gameStatus === CPU_BOWLING) {
             if (userOvers < totalOVers) {
-                console.log("userOvers", userOvers)
+
                 const cpuNumber = Math.floor(Math.random() * 7);
                 setGuessedNumber(value);
                 setCpuNumber(cpuNumber);
@@ -154,6 +181,14 @@ const UserBattingSecond = () => {
                     setUserWickets(userWickets + 1);
                     setCpuBalls(cpuBalls + 1);
                     setGuessedRuns([...guessedRuns, "W"]);
+
+                    // Start the wicket animation
+                    setWicketAnimation(true);
+
+                    // Stop the animation after 2 seconds
+                    setTimeout(() => {
+                        setWicketAnimation(false);
+                    }, 3000);
                 }
                 else {
                     setUserRuns(userRuns + value);
@@ -170,7 +205,7 @@ const UserBattingSecond = () => {
                 if (userWickets === teamSize - 1) {
                     setGameStatus(GAME_END)
                 }
-                console.log(cpuBalls)
+
             }
         }
     }
@@ -208,116 +243,104 @@ const UserBattingSecond = () => {
                 setResultDescription("CPU wins")
             }
         }
-        console.log("gameStatus", gameStatus)
+
     }, [gameStatus, userRuns, cpuRuns])
 
 
     return (
         <>
-            <AlertDialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-                <AlertDialogContent>
-                    <AlertDialogHeader>
-                        <AlertDialogTitle>Welcome to the Game!</AlertDialogTitle>
-                        <AlertDialogDescription>
-                            The game is about to start. Prepare yourself and choose your runs wisely!
-                        </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                        <AlertDialogAction onClick={() => modalHandler()}>Start</AlertDialogAction>
-                    </AlertDialogFooter>
-                </AlertDialogContent>
-            </AlertDialog>
+            <GameAlertDialog
+                open={isModalOpen}
+                onOpenChange={setIsModalOpen}
+                title="Welcome to the Game!"
+                description="The game is about to start. Prepare yourself and choose your runs wisely!
+                The runs will be added to scoreboard until you and the CPU get the same number.
+                If you and CPU get the same number, you are out!!!
+                "
+                actionText="Start"
+                onActionClick={modalHandler}
+            />
 
             {/* after  user batting finishes */}
-            <AlertDialog open={userEndInninngModal} onOpenChange={setUserEndInningModal}>
-                <AlertDialogContent>
-                    <AlertDialogHeader>
-                        <AlertDialogTitle>Welcome to the Game!</AlertDialogTitle>
-                        <AlertDialogDescription>
-                            The game is about to start. Prepare yourself and choose your runs wisely!
-                        </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                        <AlertDialogAction onClick={() => userBattingEndModalHanlder()}>Start Bowling</AlertDialogAction>
-                    </AlertDialogFooter>
-                </AlertDialogContent>
-            </AlertDialog>
+            <GameAlertDialog
+                open={userEndInninngModal}
+                onOpenChange={setUserEndInningModal}
+                title="End of Innings!"
+                description="Your batting innings have ended. Get ready to start bowling!"
+                actionText="Start Bowling"
+                onActionClick={userBattingEndModalHanlder}
+            />
 
-            <AlertDialog open={gameEndModal} onOpenChange={setGameEndModal}>
-                <AlertDialogContent>
-                    <AlertDialogHeader>
-                        <AlertDialogTitle>Game ends!</AlertDialogTitle>
-                        <AlertDialogDescription>
-                            {resultDescription}
-                        </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                        <AlertDialogAction onClick={() => viewScore()}>View Score</AlertDialogAction>
-                    </AlertDialogFooter>
-                </AlertDialogContent>
-            </AlertDialog>
+            <GameAlertDialog
+                open={gameEndModal}
+                onOpenChange={setGameEndModal}
+                title="Game Ends!"
+                description={resultDescription}
+                actionText="View Score"
+                onActionClick={viewScore}
+            />
+            {wicketAnimation ? <WicketAnimation /> :
+                <div className="w-full h-screen flex justify-center items-start bg-zomato_red">
+                    <div className=" lg:w-3/5 xs:w-[90%] h-4/5 flex flex-col items-center">
+                        <p className="heading mt-8 text-center">CRICADDICTOR</p>
+                        <div className="w-full flex justify-between items-center mt-4">
+                            <TeamScoreHead
+                                teamName={team.teamA}
+                                runs={userRuns}
+                                wickets={userWickets}
+                                overs={userOvers}
+                                balls={userBalls}
+                                total_overs={totalOVers}
+                            />
+                            <VersusLogo />
+                            <div className="w-2/5 flex flex-col justify-center items-center">
+                                <div className="shadow-shadow_custom2 size-32 flex flex-col justify-center items-center rounded-xl bg-white">
+                                    <Avatar>
+                                        <AvatarImage sizes="48" src="/avatars/avatar-sepcs-child.jpeg" />
+                                        <AvatarFallback>CN</AvatarFallback>
+                                    </Avatar>
+                                    <p className="text-lg ">{team.teamB}</p>
+                                </div>
+                                <p className="mt-4 text-white">{cpuRuns}/{cpuWickets}</p>
+                                <p className="text-white">{cpuOvers}.{cpuBalls}/{totalOVers}(ov)</p>
 
-            <div className="w-full h-screen flex justify-center items-start bg-zomato_red">
-                <div className=" lg:w-3/5 xs:w-[90%] h-4/5 flex flex-col items-center">
-                    <p className="heading mt-8 text-center">CRICADDICTOR</p>
-                    <div className="w-full flex justify-between items-center mt-4">
-                        <TeamScoreHead
-                            teamName={team.teamA}
-                            runs={userRuns}
-                            wickets={userWickets}
-                            overs={userOvers}
-                            balls={userBalls}
-                            total_overs={totalOVers}
-                        />
-                        <VersusLogo />
-                        <div className="w-2/5 flex flex-col justify-center items-center">
-                            <div className="shadow-shadow_custom2 size-32 flex flex-col justify-center items-center rounded-xl bg-white">
-                                <Avatar>
-                                    <AvatarImage sizes="48" src="/avatars/avatar-sepcs-child.jpeg" />
-                                    <AvatarFallback>CN</AvatarFallback>
-                                </Avatar>
-                                <p className="text-lg ">{team.teamB}</p>
-                            </div>
-                            <p className="mt-4 text-white">{cpuRuns}/{cpuWickets}</p>
-                            <p className="text-white">{cpuOvers}.{cpuBalls}/{totalOVers}(ov)</p>
-
-                        </div>
-                    </div>
-
-                    <div className="w-full  flex flex-col gap-8 p-4 mt-8 shadow-shadow_custom2 rounded-xl bg-white">
-                        <p className="text-center">Select runs you want to score.</p>
-                        <div className="w-full flex gap-8 flex-wrap items-center justify-center">
-                            {runButtons.map((item, index) => (
-                                <button
-                                    key={index}
-                                    className="w-1/6 h-16 border-2 rounded-md border-red-500 hover:bg-red-400"
-                                    onClick={() => guessedNumberHandler(item.value)}
-                                >
-                                    {item.name}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                    <div className="w-full mt-4 flex justify-between items-center ">
-                        <div className="w-2/5 flex flex-col justify-center items-center">
-                            <div className=" w-20 h-20  rounded-xl flex justify-center items-center shadow-shadow_custom2 bg-white">
-                                <p className="text-2xl">{guessedNumber}</p>
                             </div>
                         </div>
-                        <div>
-                            {/* <img src="/versus.png" alt="versus" className="w-20 h-20" /> */}
-                            <video src="/Cricket Ball.mp4" className="w-20 h-20"></video>
-                        </div>
-                        <div className="w-2/5 flex flex-col justify-center items-center">
-                            <div className=" w-20 h-20  rounded-xl flex justify-center items-center shadow-shadow_custom2 bg-white">
-                                <p className="text-2xl">{cpuNumber}</p>
+
+                        <div className="w-full  flex flex-col gap-8 p-4 mt-8 shadow-shadow_custom2 rounded-xl bg-white">
+                            <p className="text-center">Select runs you want to score.</p>
+                            <div className="w-full flex gap-8 flex-wrap items-center justify-center">
+                                {runButtons.map((item, index) => (
+                                    <button
+                                        key={index}
+                                        className="w-1/6 h-16 border-2 rounded-md border-red-500 hover:bg-red-400"
+                                        onClick={() => guessedNumberHandler(item.value)}
+                                    >
+                                        {item.name}
+                                    </button>
+                                ))}
                             </div>
                         </div>
+                        <div className="w-full mt-4 flex justify-between items-center ">
+                            <div className="w-2/5 flex flex-col justify-center items-center">
+                                <div className=" w-20 h-20  rounded-xl flex justify-center items-center shadow-shadow_custom2 bg-white">
+                                    <p className="text-2xl">{guessedNumber}</p>
+                                </div>
+                            </div>
+                            <div>
+                                {/* <img src="/versus.png" alt="versus" className="w-20 h-20" /> */}
+                                <video src="/Cricket Ball.mp4" className="w-20 h-20"></video>
+                            </div>
+                            <div className="w-2/5 flex flex-col justify-center items-center">
+                                <div className=" w-20 h-20  rounded-xl flex justify-center items-center shadow-shadow_custom2 bg-white">
+                                    <p className="text-2xl">{cpuNumber}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {gameStatus === CPU_BOWLING ? <BallTracker guessedRuns={guessedRuns} /> : ""}
+                        {gameStatus === CPU_BATTING ? <BallTracker guessedRuns={cpuRunsList} /> : ""}
                     </div>
-                    {gameStatus === CPU_BOWLING ? <BallTracker guessedRuns={guessedRuns} /> : ""}
-                    {gameStatus === CPU_BATTING ? <BallTracker guessedRuns={cpuRunsList} /> : ""}
-                </div>
-            </div>
+                </div>}
 
 
         </>
