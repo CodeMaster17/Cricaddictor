@@ -12,8 +12,11 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from "../components/ui/alert-dialog";
-import { CPU_BATTING, CPU_BATTING_START, CPU_BOWLING, CPU_BOWLING_START, GAME_END, MATCH_START,  USER_BOWLING, runButtons } from "../lib/constants";
+import { CPU_BATTING, CPU_BATTING_START, CPU_BOWLING, CPU_BOWLING_START, GAME_END, MATCH_START, USER_BOWLING, runButtons } from "../lib/constants";
 import BallTracker from "../components/Ball-Tracker";
+import VersusLogo from "@/components/Versus-logo";
+import TeamScoreHead from "@/components/TeamScoreHead";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const UserBattingSecond = () => {
     const [guessedRuns, setGuessedRuns] = useState<any[]>([]);
@@ -254,34 +257,34 @@ const UserBattingSecond = () => {
                 </AlertDialogContent>
             </AlertDialog>
 
-            <div className="w-full h-screen flex justify-center items-start mt-2">
+            <div className="w-full h-screen flex justify-center items-start bg-zomato_red">
                 <div className=" lg:w-3/5 xs:w-[90%] h-4/5 flex flex-col items-center">
+                    <p className="heading mt-8 text-center">CRICADDICTOR</p>
                     <div className="w-full flex justify-between items-center mt-4">
-                        <div className="w-2/5 flex flex-col justify-center items-center ">
-                            <div className="shadow-shadow_custom2 size-32 flex justify-center items-center rounded-xl">
-                                <p className="text-2xl mt-4">
-                                    {team.teamA}
-                                </p>
-                            </div>
-                            {gameStatus === USER_BOWLING || gameStatus === GAME_END ? <>
-                                <p className="mt-4">{userRuns}/{userWickets}</p>
-                            </> : <p className="mt-4">Yet to bat</p>}
-                            <p className="">{userOvers}.{userBalls}/{totalOVers}(ov)</p>
-                        </div>
-                        <div>
-                            <img src="/versus.png" alt="versus" className="w-20 h-20" />
-                        </div>
+                        <TeamScoreHead
+                            teamName={team.teamA}
+                            runs={userRuns}
+                            wickets={userWickets}
+                            overs={userOvers}
+                            balls={userBalls}
+                            total_overs={totalOVers}
+                        />
+                        <VersusLogo />
                         <div className="w-2/5 flex flex-col justify-center items-center">
-                            <div className="shadow-shadow_custom2 size-32 flex justify-center items-center rounded-xl">
-                                <p className="text-2xl">{team.teamB}</p>
+                            <div className="shadow-shadow_custom2 size-32 flex flex-col justify-center items-center rounded-xl bg-white">
+                                <Avatar>
+                                    <AvatarImage sizes="48" src="/avatars/avatar-sepcs-child.jpeg" />
+                                    <AvatarFallback>CN</AvatarFallback>
+                                </Avatar>
+                                <p className="text-lg ">{team.teamB}</p>
                             </div>
-                            <p className="mt-4">{cpuRuns}/{cpuWickets}</p>
-                            <p>{cpuOvers}.{cpuBalls}/{totalOVers}(ov)</p>
+                            <p className="mt-4 text-white">{cpuRuns}/{cpuWickets}</p>
+                            <p className="text-white">{cpuOvers}.{cpuBalls}/{totalOVers}(ov)</p>
 
                         </div>
                     </div>
 
-                    <div className="w-full  flex flex-col gap-8 p-4 mt-8 shadow-shadow_custom2 rounded-xl">
+                    <div className="w-full  flex flex-col gap-8 p-4 mt-8 shadow-shadow_custom2 rounded-xl bg-white">
                         <p className="text-center">Select runs you want to score.</p>
                         <div className="w-full flex gap-8 flex-wrap items-center justify-center">
                             {runButtons.map((item, index) => (
@@ -295,11 +298,9 @@ const UserBattingSecond = () => {
                             ))}
                         </div>
                     </div>
-                    <p className="text-center mt-4">The runs will be added to scoreboard until you and the CPU get the same number.</p>
-                    <p className="text-center mt-2">If you and CPU get the same number, you are out!!!</p>
-                    <div className="w-full mt-2 flex justify-between items-center ">
+                    <div className="w-full mt-4 flex justify-between items-center ">
                         <div className="w-2/5 flex flex-col justify-center items-center">
-                            <div className=" w-20 h-20  rounded-xl flex justify-center items-center shadow-shadow_custom2">
+                            <div className=" w-20 h-20  rounded-xl flex justify-center items-center shadow-shadow_custom2 bg-white">
                                 <p className="text-2xl">{guessedNumber}</p>
                             </div>
                         </div>
@@ -308,7 +309,7 @@ const UserBattingSecond = () => {
                             <video src="/Cricket Ball.mp4" className="w-20 h-20"></video>
                         </div>
                         <div className="w-2/5 flex flex-col justify-center items-center">
-                            <div className=" w-20 h-20  rounded-xl flex justify-center items-center shadow-shadow_custom2">
+                            <div className=" w-20 h-20  rounded-xl flex justify-center items-center shadow-shadow_custom2 bg-white">
                                 <p className="text-2xl">{cpuNumber}</p>
                             </div>
                         </div>
