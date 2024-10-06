@@ -1,13 +1,15 @@
+import NextButton from "@/components/NextButton"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import { Link } from "react-router-dom"
-import { Button } from "../components/ui/button"
+import { useNavigate } from "react-router-dom"
 
 
 const ViewScore = () => {
 
     const score = useSelector((state: any) => state.game.score)
     const team = useSelector((state: any) => state.game.teamName)
+
+    const navigate = useNavigate()
     const [result, setResult] = useState("")
 
     const decideMatchResult = () => {
@@ -38,11 +40,11 @@ const ViewScore = () => {
     return (
         <>
             <div className="w-full h-screen flex flex-col  items-center">
-                <div className="bg-light_blue w-full h-40">
+                <div className="bg-zomato_red w-full h-40">
 
                 </div>
-                <div className="border-2 mt-[-4rem] p-4 rounded-xl bg-white w-4/5 h-40 flex flex-col items-center shadow-shadow_custom2">
-                    <div className="w-full flex  justify-between items-center border-2">
+                <div className=" mt-[-4rem] p-4 rounded-xl bg-white w-4/5  flex flex-col items-center shadow-shadow_custom2">
+                    <div className="w-full flex  justify-between items-center ">
                         <p>
                             Match Finished
                         </p>
@@ -63,7 +65,8 @@ const ViewScore = () => {
                             {score.teamB}
                         </p>
                     </div>
-                    <div className="flex w-full mt-2 justify-between items-center">
+                    <div className="border-2 w-full mt-4"></div>
+                    <div className="flex w-full mt-2 justify-between items-center mt-4">
                         <p>
                             {result}
                         </p>
@@ -71,9 +74,7 @@ const ViewScore = () => {
                 </div>
                 <div>
                 </div>
-                <Button>
-                    <Link to="/">Play Again</Link>
-                </Button>
+                <NextButton text="Play Again" type="button" onClickHandler={() => { navigate("/") }} />
             </div>
         </>
     )
