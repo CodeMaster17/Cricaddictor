@@ -16,7 +16,7 @@ const TeamNameForm = () => {
             {/* cricaddictor heading */}
             <Heading />
 
-            <div className="mt-4  h-2/5 w-full  rounded-md border-2 bg-white shadow-shadow_custom2">
+            <div className="mt-4 min-h-[350px]  w-full  rounded-md border-2 bg-white shadow-shadow_custom2">
                 <div className="mt-4">
                     <p className="text-2xl text-left text-bold ml-3">CHOOSE TEAM NAMES</p>
                 </div>

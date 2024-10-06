@@ -64,8 +64,8 @@ const TeamName = () => {
 
     return (
         <>
-            <div className='w-full px-3 pt-2 '>
-                <div className="mt-4">
+            <div className='w-full px-3 pt-2 bg-white'>
+                <div className="mt-4 bg-white">
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                             <FormField
