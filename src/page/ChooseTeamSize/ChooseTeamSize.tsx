@@ -34,7 +34,7 @@ const ChooseTeamSize = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '-100vw' }}
             transition={{ duration: 0.5 }}
-            className="relative h-screen w-full border-2 bg-zomato_red pl-4 pr-4">
+            className="relative h-[100dvh] w-full border-2 bg-zomato_red pl-4 pr-4">
 
             {/* cricaddictor heading */}
             <Heading />
