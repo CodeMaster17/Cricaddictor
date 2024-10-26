@@ -10,7 +10,7 @@ const Home = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100vw' }}
             transition={{ duration: 0.5 }}
-            className="relative flex h-screen w-full items-center justify-center bg-zomato_red pl-4 pr-4">
+            className="relative flex h-[100dvh] w-full items-center justify-center bg-zomato_red pl-4 pr-4">
             <div className="relative h-screen w-full">
                 <p className="heading mt-8">PLAY</p>
                 <p className="heading">CRICADDICTOR</p>
