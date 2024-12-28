@@ -7,14 +7,14 @@ interface OverSelectionProps {
     clickHandler: (size: number) => void;
 }
 
-const OversSelectionButton: React.FC<OverSelectionProps> = ({ buttonClickedId, buttonClicked, clickHandler }) => {
+const TeamSelectionButton: React.FC<OverSelectionProps> = ({ buttonClickedId, buttonClicked, clickHandler }) => {
     return (
         <>
             {teamSize.map((item) => (
                 <button
                     key={item.id}
-                    className={`button-select ${buttonClicked && buttonClickedId === item.size ? "text-black !border-zomato_red !border-2" : " "}`}
                     onClick={() => clickHandler(item.size)}
+                    className={`button-select ${buttonClicked && buttonClickedId === item.size ? "text-black !bg-[#ef7c7c] !border-[#4eea9c]" : " !bg-white"}`}
                 >
                     {item.size}
                 </button>
@@ -23,4 +23,4 @@ const OversSelectionButton: React.FC<OverSelectionProps> = ({ buttonClickedId, b
     )
 }
 
-export default OversSelectionButton
+export default TeamSelectionButton

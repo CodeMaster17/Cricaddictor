@@ -11,7 +11,7 @@ const TeamNameForm = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '-100vw' }}
             transition={{ duration: 0.5 }}
-            className='relative h-screen w-full border-2 bg-zomato_red pl-4 pr-4'>
+            className='relative h-screen w-full bg-zomato_red pl-4 pr-4'>
 
             {/* cricaddictor heading */}
             <Heading />
@@ -22,7 +22,7 @@ const TeamNameForm = () => {
                 </div>
                 <TeamName />
             </div>
-            <img src="/photo-2.png" alt="hero-img" className="absolute bottom-0 w-full max-w-[357px] h-auto sm:max-w-[320px] md:max-w-[400px] lg:max-w-[450px] xl:max-w-[500px]" />
+            <img src="/photo-2.png" alt="hero-img" className="opacity-5 absolute bottom-0 w-full max-w-[357px] h-auto sm:max-w-[320px] md:max-w-[400px] lg:max-w-[450px] xl:max-w-[500px]" />
         </motion.div>
     )
 }

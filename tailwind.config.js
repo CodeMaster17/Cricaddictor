@@ -17,6 +17,10 @@ module.exports = {
       },
     },
     extend: {
+      backgroundImage: {
+        'dhoni': "url('./dhoni.png')",
+        'footer-texture': "url('/img/footer-texture.png')",
+      },
       colors: {
         zomato_red: '#EA4E4E',
         light_blue: "#1479EA",
